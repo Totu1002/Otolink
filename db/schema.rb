@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_053746) do
+ActiveRecord::Schema.define(version: 2020_10_12_151526) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2020_10_10_053746) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "recruits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "type"
+    t.string "title"
+    t.text "body"
+    t.string "area"
+    t.string "stance"
+    t.string "gender"
+    t.string "part"
+    t.string "genre"
+    t.boolean "is_status", default: true, null: false
   end
 
   create_table "users", force: :cascade do |t|
