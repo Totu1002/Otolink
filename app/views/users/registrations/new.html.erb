@@ -44,6 +44,16 @@
           <tr>
             <td>
               <div class="field">
+                <%= f.label :area, "活動地域" %><br>
+                <%= f.collection_check_boxes :area, Prefecture.all, :id, :name do |area| %>
+                  <%= area.label {area.check_box + area.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
                 <%= f.label :password, "パスワード" %>
                 <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> 文字以上)</em>
