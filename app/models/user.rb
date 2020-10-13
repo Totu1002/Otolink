@@ -8,5 +8,7 @@ class User < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
+  belongs_to_active_hash :user_part
+  belongs_to_active_hash :user_genre
 
 end
