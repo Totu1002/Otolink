@@ -7,11 +7,8 @@ class CreateRecruits < ActiveRecord::Migration[5.2]
       t.string :type
       t.string :title
       t.text :body
-      t.string :area
       t.string :stance
       t.string :gender
-      t.string :part
-      t.string :genre
       t.boolean :is_status, default: true, null: false
     end
   end

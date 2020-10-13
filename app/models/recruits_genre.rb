@@ -1,0 +1,2 @@
+class RecruitsGenre < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_151526) do
+ActiveRecord::Schema.define(version: 2020_10_13_165544) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 2020_10_12_151526) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recruits", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,12 +50,30 @@ ActiveRecord::Schema.define(version: 2020_10_12_151526) do
     t.string "type"
     t.string "title"
     t.text "body"
-    t.string "area"
     t.string "stance"
     t.string "gender"
-    t.string "part"
-    t.string "genre"
     t.boolean "is_status", default: true, null: false
+  end
+
+  create_table "recruits_genres", force: :cascade do |t|
+    t.integer "recruit_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruits_parts", force: :cascade do |t|
+    t.integer "recruit_id"
+    t.integer "part_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruits_prefectures", force: :cascade do |t|
+    t.integer "recruit_id"
+    t.integer "prefecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,15 +86,33 @@ ActiveRecord::Schema.define(version: 2020_10_12_151526) do
     t.text "introduction"
     t.string "gender"
     t.integer "age"
-    t.string "area"
-    t.string "part"
-    t.string "genre"
     t.string "profile_image_id"
     t.boolean "is_member", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_genres", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users_parts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "part_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users_prefectures", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "prefecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
