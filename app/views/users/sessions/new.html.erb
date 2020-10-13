@@ -3,8 +3,8 @@
     <h2>ユーザーログイン</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.label :name, "ニックネーム" %><br />
-        <%= f.email_field :name, autofocus: true, autocomplete: "name" %>
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="field">

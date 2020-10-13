@@ -45,9 +45,23 @@
             <td>
               <div class="field">
                 <%= f.label :area, "活動地域" %><br>
-                <%= f.collection_check_boxes :area, Prefecture.all, :id, :name do |area| %>
-                  <%= area.label {area.check_box + area.text} %>
-                <% end %>
+                <%= f.collection_select :area, Prefecture.all, :name, :name,prompt:"--選択してください--" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :part, "担当パート" %><br>
+                <%= f.collection_select :part, UserPart.all, :name, :name,prompt:"--選択してください--" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :genre, "好きなジャンル" %><br>
+                <%= f.collection_select :genre, UserGenre.all, :name, :name,prompt:"--選択してください--" %>
               </div>
             </td>
           </tr>
