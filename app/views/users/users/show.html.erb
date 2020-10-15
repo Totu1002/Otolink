@@ -6,6 +6,11 @@
       <table class="table">
         <tbody>
           <tr>
+            <tb>
+              <%=%>
+            </tb>
+          </tr>
+          <tr>
             <td>ユーザー名</td>
             <td><%= @user.name %></td>
           </tr>
@@ -25,16 +30,27 @@
           <tr>
             <td>活動エリア</td>
             <td>
-              <%= @user.area %>
+              <% @user.prefectures.each do |pref| %>
+                <%= pref.name %>
+              <% end %>
             </td>
           </tr>
           <tr>
             <td>担当パート</td>
-            <td><%= @user.part %></td>
+            <td>
+              <% @user.parts.each do |part| %>
+                <%= part.name %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td>好みのジャンル</td>
-            <td><%= @user.genre %></td>
+            <td>
+              <% @user.genres.each do |genre| %>
+                <%= genre.name %>
+              <% end %>
+            </td>
+          </tr>
           </tr>
           <tr>
             <td>自己紹介文</td>

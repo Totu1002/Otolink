@@ -36,9 +36,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.text :introduction
       t.string :gender
       t.integer :age
-      t.string :area
-      t.string :part
-      t.string :genre
       t.string :profile_image_id
       t.boolean :is_member, default: true, null: false
 

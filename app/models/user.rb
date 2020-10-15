@@ -4,11 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :recruit
+  has_many :recruits
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :prefecture
-  belongs_to_active_hash :user_part
-  belongs_to_active_hash :user_genre
+  has_many :users_prefectures
+  has_many :prefectures, through: :users_prefectures
+
+  has_many :users_parts
+  has_many :parts, through: :users_parts
+
+  has_many :users_genres
+  has_many :genres, through: :users_genres
 
 end

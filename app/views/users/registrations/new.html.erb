@@ -27,9 +27,9 @@
               <div class="field">
                 <p><strong>性別</strong></p>
                 <%= f.label :gender, "男性" %>
-                <%= f.radio_button :gender, "man" %>
+                <%= f.radio_button :gender, "男性" %>
                 <%= f.label :gender, "女性" %>
-                <%= f.radio_button :gender, "woman" %>
+                <%= f.radio_button :gender, "女性" %>
               </div>
             </td>
           </tr>
@@ -44,24 +44,31 @@
           <tr>
             <td>
               <div class="field">
-                <%= f.label :area, "活動地域" %><br>
-                <%= f.collection_select :area, Prefecture.all, :name, :name,prompt:"--選択してください--" %>
+                <%= f.label :prefectures, "活動地域" %><br>
+                <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                  <%= area.label {area.check_box + area.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :parts, "担当パート" %><br>
+                <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                  <%= part.label {part.check_box + part.text} %>
+                <% end %>
               </div>
             </td>
           </tr>
           <tr>
             <td>
               <div class="field">
-                <%= f.label :part, "担当パート" %><br>
-                <%= f.collection_select :part, UserPart.all, :name, :name,prompt:"--選択してください--" %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :genre, "好きなジャンル" %><br>
-                <%= f.collection_select :genre, UserGenre.all, :name, :name,prompt:"--選択してください--" %>
+                <%= f.label :genres, "好きなジャンル" %><br>
+                <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                  <%= genre.label {genre.check_box + genre.text} %>
+                <% end %>
               </div>
             </td>
           </tr>
