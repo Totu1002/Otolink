@@ -1,0 +1,66 @@
+<h1>Users::Users#show</h1>
+<p>Find me in app/views/users/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="">
+      <table class="table">
+        <tbody>
+          <tr>
+            <tb>
+              <%=%>
+            </tb>
+          </tr>
+          <tr>
+            <td>ユーザー名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @user.email %></td>
+            <td><%= link_to "変更" %></td>
+          </tr>
+          <tr>
+            <td>性別</td>
+            <td><%= @user.gender %></td>
+          </tr>
+          <tr>
+            <td>年齢</td>
+            <td><%= @user.age %></td>
+          </tr>
+          <tr>
+            <td>活動エリア</td>
+            <td>
+              <% @user.prefectures.each do |pref| %>
+                <%= pref.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>担当パート</td>
+            <td>
+              <% @user.parts.each do |part| %>
+                <%= part.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>好みのジャンル</td>
+            <td>
+              <% @user.genres.each do |genre| %>
+                <%= genre.name %>
+              <% end %>
+            </td>
+          </tr>
+          </tr>
+          <tr>
+            <td>自己紹介文</td>
+            <td><%= @user.introduction %></td>
+          </tr>
+          <tr>
+            <td><%= link_to "プロフィールを変更" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
