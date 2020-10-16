@@ -4,9 +4,16 @@ class Users::UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to user_path, notice: "プロフィールの更新に成功しました！"
+    else
+      render "edit"
+    end
   end
 
   #ユーザー退会確認画面用アクション
@@ -19,6 +26,6 @@ class Users::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name,:introduction,:gender,:age,:area,:part,:genre,:is_member,:email,:prefecture_ids => [],:part_ids => [],:genre_ids => [])
+    params.require(:user).permit(:name,:introduction,:gender,:age,:is_member,:email, :profile_image,:prefecture_ids => [],:part_ids => [],:genre_ids => [])
   end
 end

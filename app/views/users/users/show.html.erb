@@ -1,34 +1,30 @@
-<h1>Users::Users#show</h1>
-<p>Find me in app/views/users/users/show.html.erb</p>
 <div class="container">
   <div class="row">
+    <h1>Users::Users#show</h1>
+    <h3>マイページ トップ</h3>
+    <p>Find me in app/views/users/users/show.html.erb</p>
     <div class="">
       <table class="table">
         <tbody>
           <tr>
             <tb>
-              <%=%>
+              <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
             </tb>
           </tr>
           <tr>
-            <td>ユーザー名</td>
+            <td><strong>ユーザー名</strong></td>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td>メールアドレス</td>
-            <td><%= @user.email %></td>
-            <td><%= link_to "変更" %></td>
-          </tr>
-          <tr>
-            <td>性別</td>
+            <td><strong>性別</strong></td>
             <td><%= @user.gender %></td>
           </tr>
           <tr>
-            <td>年齢</td>
+            <td><strong>年齢</strong></td>
             <td><%= @user.age %></td>
           </tr>
           <tr>
-            <td>活動エリア</td>
+            <td><strong>活動エリア</strong></td>
             <td>
               <% @user.prefectures.each do |pref| %>
                 <%= pref.name %>
@@ -36,7 +32,7 @@
             </td>
           </tr>
           <tr>
-            <td>担当パート</td>
+            <td><strong>担当パート</strong></td>
             <td>
               <% @user.parts.each do |part| %>
                 <%= part.name %>
@@ -44,7 +40,7 @@
             </td>
           </tr>
           <tr>
-            <td>好みのジャンル</td>
+            <td><strong>好みのジャンル</strong></td>
             <td>
               <% @user.genres.each do |genre| %>
                 <%= genre.name %>
@@ -53,14 +49,14 @@
           </tr>
           </tr>
           <tr>
-            <td>自己紹介文</td>
+            <td><strong>自己紹介文<strong></td>
             <td><%= @user.introduction %></td>
-          </tr>
-          <tr>
-            <td><%= link_to "プロフィールを変更" %></td>
           </tr>
         </tbody>
       </table>
+      <div>
+        <%= link_to "プロフィール編集", edit_user_path, class: 'btn btn-default btn-success' %>
+      </div>
     </div>
   </div>
 </div>

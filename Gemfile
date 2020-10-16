@@ -72,6 +72,8 @@ gem 'jquery-rails'
 gem 'kaminari','~> 1.2.1'
 gem 'pry-rails'
 gem 'active_hash'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
 
 gem 'dotenv-rails'
 group :production do

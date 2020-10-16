@@ -15,4 +15,6 @@ class User < ApplicationRecord
   has_many :users_genres
   has_many :genres, through: :users_genres
 
+  attachment :profile_image, destroy: false
+
 end

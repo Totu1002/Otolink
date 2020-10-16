@@ -8,17 +8,32 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <header>
-    <!-- テスト用ヘッダー -->
-    <% if user_signed_in? %>
-      <%= link_to 'マイページ', user_path(current_user.id) %> |
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %> |
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+  <header class="">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to "Otolink", home_path, class: "navbar-brand" %>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-list"><%= link_to 'Otolinkとは' %></li>
+          <% if user_signed_in? %>
+            <li class=""><%= link_to '記事の検索' %></li>
+            <li class=""><%= link_to '記事の管理' %></li>
+            <li class=""><%= link_to 'マイページ', user_path(current_user.id) %></li>
+            <li class=""><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li class=""><%= link_to '記事の検索' %></li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+
   </header>
   <body>
     <%= yield %>
   </body>
+  <footer></footer>
 </html>
