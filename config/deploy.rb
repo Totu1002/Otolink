@@ -6,7 +6,7 @@ set :repo_url, "https://Totu1002:tomohiro1030@github.com/Totu1002/Otolink.git"
 set :deploy_to, "/home/ec2-user/Otolink"
 set :rbenv_ruby, '2.5.7'
 set :linked_files, %w{config/master.key .env}
-append :linked_dirs, "log", "public", "tmp"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets","public/system"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
