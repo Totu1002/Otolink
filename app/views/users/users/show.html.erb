@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h1>Users::Users#show</h1>
-    <h3>マイページ トップ</h3>
+    <h2>マイページ トップ</h2>
     <p>Find me in app/views/users/users/show.html.erb</p>
     <div class="">
       <table class="table">
@@ -58,5 +58,12 @@
         <%= link_to "プロフィール編集", edit_user_path, class: 'btn btn-default btn-success' %>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <h2>記事の管理</h2>
+    <h3>メンバー募集記事</h3>
+    <%= link_to "新規記事投稿", user_recruit_member_path,class: 'btn btn-default btn-success' %>
+    <h3>バンド募集記事</h3>
+    <%= link_to "新規記事投稿", user_recruit_band_path,class: 'btn btn-default btn-success' %>
   </div>
 </div>

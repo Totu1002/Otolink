@@ -16,9 +16,13 @@ Rails.application.routes.draw do
 
   scope module: 'users' do
     resources :users, only:[:show, :edit, :update]
-    get 'user/withdrawl'=> "customers#withdrawl"
-    patch 'user/withdrawl' => "customers#hide"
+    #ユーザー論理退会アクション
+    get 'user/withdrawl'=> "users#withdrawl"
+    patch 'user/withdrawl' => "users#hide"
     resources :recruits, only:[:new, :create, :show, :edit, :update, :destroy]
+    #記事投稿ページ
+    get 'user/recruit_member'=> "recruits#recruit_member"
+    get 'user/recruit_band'=> "recruits#recruit_band"
   end
 
   namespace :admins do

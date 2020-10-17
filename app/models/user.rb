@@ -17,4 +17,9 @@ class User < ApplicationRecord
 
   attachment :profile_image, destroy: false
 
+  enum gender: {
+    指定なし: 0,
+    男性: 1,
+    女性: 2
+  }
 end

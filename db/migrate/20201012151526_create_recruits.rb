@@ -4,11 +4,11 @@ class CreateRecruits < ActiveRecord::Migration[5.2]
 
       t.timestamps
       t.integer :user_id
-      t.string :type
+      t.integer :article_type
       t.string :title
       t.text :body
-      t.string :stance
-      t.string :gender
+      t.integer :stance
+      t.integer :gender
       t.boolean :is_status, default: true, null: false
     end
   end
