@@ -1,8 +1,12 @@
-<h1>Users::Users#edit</h1>
-<p>Find me in app/views/users/users/edit.html.erb</p>
 <div class="container">
   <div class="row">
+    <h1>Users::Users#edit</h1>
+    <h2>プロフィール編集ページ</h2>
+    <p>Find me in app/views/users/users/edit.html.erb</p>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
     <%= form_for(@user) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
       <table class="table">
         <tbody>
           <tr>

@@ -15,7 +15,7 @@
           <%= link_to "Otolink", home_path, class: "navbar-brand" %>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li class="nav-list"><%= link_to 'Otolinkとは' %></li>
+          <li class=""><%= link_to 'Otolinkとは',about_path %></li>
           <% if user_signed_in? %>
             <li class=""><%= link_to '記事の検索' %></li>
             <li class=""><%= link_to '記事の管理' %></li>

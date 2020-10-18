@@ -1,6 +1,10 @@
 class Users::UsersController < ApplicationController
   def show
     @user = current_user
+
+    #投稿記事表示用メソッド
+    @recruit_members = Recruit.where(article_type: "メンバー募集")
+    @recruit_bands = Recruit.where(article_type: "バンド募集")
   end
 
   def edit
@@ -10,8 +14,9 @@ class Users::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_path
+      redirect_to user_path, notice: "プロフィールの編集が完了しました。"
     else
+      flash.now[:alert] = "プロフィールの編集が失敗しました。"
       render "edit"
     end
   end

@@ -1,1 +1,81 @@
-<h1>recruit_band.html.erb</h1>
+<div class="container">
+  <div class="row">
+    <h2>バンド募集投稿ページ</h2>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
+    <%= form_for(@recruit) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= f.label :type, "記事の種類" %><br>
+              バンド募集
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :is_status, "記事の状態" %><br>
+              <%= f.radio_button :is_status, :true, checked: true %>
+              <%= f.label :is_status, "公開", {value: true } %>
+              <%= f.radio_button :is_status, :false %>
+              <%= f.label :is_status, "未公開", {value: false} %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :title, "記事のタイトル" %><br>
+                <%= f.text_field :title, autofocus: true, autocomplete: "title", size: "60" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :stance, "活動の方向性" %><br>
+                <%= f.radio_button :stance, :プロ志向 %>
+                <%= f.label :stance, "プロ志向" %>
+                <%= f.radio_button :stance, :アマチュア志向 %>
+                <%= f.label :stance, "アマチュア志向" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :prefectures, "活動地域" %><br>
+                <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                  <%= area.label {area.check_box + area.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :genres, "ジャンル" %><br>
+                <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                  <%= genre.label {genre.check_box + genre.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :body, "記事の内容" %><br>
+                <%= f.text_area :body, autocomplete: "body", size: "20x10", class: "form-control" %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= f.hidden_field :article_type, value: "バンド募集" %>
+      <%= f.hidden_field :gender, value: "指定なし" %>
+      <div class="actions">
+        <%= f.submit "記事を投稿する", class: 'btn btn-default btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

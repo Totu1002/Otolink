@@ -3,6 +3,8 @@
     <h1>Users::Users#show</h1>
     <h2>マイページ トップ</h2>
     <p>Find me in app/views/users/users/show.html.erb</p>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
     <div class="">
       <table class="table">
         <tbody>
@@ -62,8 +64,86 @@
   <div class="row">
     <h2>記事の管理</h2>
     <h3>メンバー募集記事</h3>
-    <%= link_to "新規記事投稿", user_recruit_member_path,class: 'btn btn-default btn-success' %>
+    <% if Recruit.where(article_type: "メンバー募集").exists? %>
+      <% @recruit_members.each do |recruit_member| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>公開ステータス</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= recruit_member.title %></td>
+              <td>
+                <% if recruit_member.is_status == true %>
+                  <p>公開中</p>
+                <% else %>
+                  <p>非公開</p>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "詳細", recruit_path(recruit_member), class: 'btn btn-default btn-success' %>
+              </td>
+              <td>
+                <%= link_to "編集", edit_recruit_path(recruit_member), class: 'btn btn-default btn-success' %>
+              </td>
+              <td>
+                <%= link_to "削除", recruit_path(recruit_member), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: 'btn btn-default btn-danger' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <p>投稿された記事はありません</p>
+      <%= link_to "新規記事投稿", user_recruit_member_path,class: 'btn btn-default btn-success' %>
+    <% end %>
     <h3>バンド募集記事</h3>
-    <%= link_to "新規記事投稿", user_recruit_band_path,class: 'btn btn-default btn-success' %>
+    <% if Recruit.where(article_type: "バンド募集").exists? %>
+      <% @recruit_bands.each do |recruit_band| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>公開ステータス</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= recruit_band.title %></td>
+              <td>
+                <% if recruit_band.is_status == true %>
+                  <p>公開中</p>
+                <% else %>
+                  <p>非公開</p>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "詳細", recruit_path(recruit_band), class: 'btn btn-default btn-success' %>
+              </td>
+              <td>
+                <%= link_to "編集", edit_recruit_path(recruit_band),class: 'btn btn-default btn-success' %>
+              </td>
+              <td>
+                <%= link_to "削除", recruit_path(recruit_band), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: 'btn btn-default btn-danger' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <p>投稿された記事はありません</p>
+      <%= link_to "新規記事投稿", user_recruit_band_path,class: 'btn btn-default btn-success' %>
+    <% end %>
   </div>
 </div>

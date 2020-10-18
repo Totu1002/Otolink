@@ -26,4 +26,14 @@ class Recruit < ApplicationRecord
     プロ志向: 1,
     アマチュア志向: 2
   }
+
+  validates :title, presence: true
+  validates :body, presence: true, length: {maximum: 200}
+  validates :article_type, presence: true
+  validates :stance, presence: true
+  #多対多テーブルの項目も必須
+  validates :prefecture_ids, presence: true
+  validates :part_ids, presence: true
+  validates :genre_ids, presence: true
+
 end

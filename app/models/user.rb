@@ -22,4 +22,14 @@ class User < ApplicationRecord
     男性: 1,
     女性: 2
   }
+
+  validates :name, presence: true, length: {maximum: 100}
+  validates :introduction, length: {maximum: 500}
+  validates :gender, presence: true
+  validates :age, presence: true
+  #多対多テーブルの項目も必須
+  validates :prefecture_ids, presence: true
+  validates :part_ids, presence: true
+  validates :genre_ids, presence: true
+
 end

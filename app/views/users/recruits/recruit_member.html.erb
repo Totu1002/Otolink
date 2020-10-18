@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
     <h2>メンバー募集投稿ページ</h2>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
     <%= form_for(@recruit) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
       <table class="table">
         <tbody>
           <tr>
@@ -14,9 +17,9 @@
             <td>
               <%= f.label :is_status, "記事の状態" %><br>
               <%= f.radio_button :is_status, :true, checked: true %>
-              <%= f.label :is_status, "有効", {value: true } %>
+              <%= f.label :is_status, "公開", {value: true } %>
               <%= f.radio_button :is_status, :false %>
-              <%= f.label :is_status, "無効", {value: false} %>
+              <%= f.label :is_status, "未公開", {value: false} %>
             </td>
           </tr>
           <tr>
