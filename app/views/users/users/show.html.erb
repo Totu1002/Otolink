@@ -6,27 +6,29 @@
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <div class="">
-      <table class="table">
+      <table class="table text-center">
         <tbody>
           <tr>
             <tb>
-              <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <div class="text-center" style="padding: 2%;">
+                <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              </div>
             </tb>
           </tr>
           <tr>
-            <td><strong>ユーザー名</strong></td>
+            <td><p><strong>ユーザー名</strong></p></td>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td><strong>性別</strong></td>
+            <td><p><strong>性別</strong></p></td>
             <td><%= @user.gender %></td>
           </tr>
           <tr>
-            <td><strong>年齢</strong></td>
+            <td><p><strong>年齢</strong></p></td>
             <td><%= @user.age %></td>
           </tr>
           <tr>
-            <td><strong>活動エリア</strong></td>
+            <td><p><strong>活動エリア</strong></p></td>
             <td>
               <% @user.prefectures.each do |pref| %>
                 <%= pref.name %>
@@ -34,7 +36,7 @@
             </td>
           </tr>
           <tr>
-            <td><strong>担当パート</strong></td>
+            <td><p><strong>担当パート</strong></p></td>
             <td>
               <% @user.parts.each do |part| %>
                 <%= part.name %>
@@ -42,7 +44,7 @@
             </td>
           </tr>
           <tr>
-            <td><strong>好みのジャンル</strong></td>
+            <td><p><strong>好みのジャンル</strong></p></td>
             <td>
               <% @user.genres.each do |genre| %>
                 <%= genre.name %>
@@ -51,20 +53,23 @@
           </tr>
           </tr>
           <tr>
-            <td><strong>自己紹介文<strong></td>
+            <td><p><strong>自己紹介文<strong></p></td>
             <td><%= @user.introduction %></td>
           </tr>
         </tbody>
       </table>
-      <div>
-        <%= link_to "プロフィール編集", edit_user_path, class: 'btn btn-default btn-success' %>
-      </div>
+      <% if user_signed_in? && current_user.id == @user.id %>
+        <div>
+          <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
+        </div>
+      <% end %>
     </div>
   </div>
-  <div class="row">
+  <% if user_signed_in? && current_user.id == @user.id %>
+    <div class="row">
     <h2>記事の管理</h2>
     <h3>メンバー募集記事</h3>
-    <% if Recruit.where(article_type: "メンバー募集").exists? %>
+    <% if Recruit.where(user_id: @user.id, article_type: "メンバー募集").exists? %>
       <% @recruit_members.each do |recruit_member| %>
         <table class="table">
           <thead>
@@ -88,13 +93,13 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to "詳細", recruit_path(recruit_member), class: 'btn btn-default btn-success' %>
+                <%= link_to "詳細", recruit_path(recruit_member), class: "btn btn-default btn-block btn-success" %>
               </td>
               <td>
-                <%= link_to "編集", edit_recruit_path(recruit_member), class: 'btn btn-default btn-success' %>
+                <%= link_to "編集", edit_recruit_path(recruit_member), class: "btn btn-default btn-block btn-success" %>
               </td>
               <td>
-                <%= link_to "削除", recruit_path(recruit_member), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: 'btn btn-default btn-danger' %>
+                <%= link_to "削除", recruit_path(recruit_member), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default btn-block btn-danger" %>
               </td>
             </tr>
           </tbody>
@@ -102,10 +107,10 @@
       <% end %>
     <% else %>
       <p>投稿された記事はありません</p>
-      <%= link_to "新規記事投稿", user_recruit_member_path,class: 'btn btn-default btn-success' %>
+      <%= link_to "新規記事投稿", user_recruit_member_path,class: "btn btn-default btn-success" %>
     <% end %>
     <h3>バンド募集記事</h3>
-    <% if Recruit.where(article_type: "バンド募集").exists? %>
+    <% if Recruit.where(user_id: @user.id,article_type: "バンド募集").exists? %>
       <% @recruit_bands.each do |recruit_band| %>
         <table class="table">
           <thead>
@@ -129,13 +134,13 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to "詳細", recruit_path(recruit_band), class: 'btn btn-default btn-success' %>
+                <%= link_to "詳細", recruit_path(recruit_band), class: "btn btn-default btn-block btn-success" %>
               </td>
               <td>
-                <%= link_to "編集", edit_recruit_path(recruit_band),class: 'btn btn-default btn-success' %>
+                <%= link_to "編集", edit_recruit_path(recruit_band),class: "btn btn-default btn-block btn-success" %>
               </td>
               <td>
-                <%= link_to "削除", recruit_path(recruit_band), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: 'btn btn-default btn-danger' %>
+                <%= link_to "削除", recruit_path(recruit_band), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default btn-block btn-danger" %>
               </td>
             </tr>
           </tbody>
@@ -146,4 +151,5 @@
       <%= link_to "新規記事投稿", user_recruit_band_path,class: 'btn btn-default btn-success' %>
     <% end %>
   </div>
+  <% end %>
 </div>

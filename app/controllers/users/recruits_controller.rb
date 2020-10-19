@@ -1,4 +1,5 @@
 class Users::RecruitsController < ApplicationController
+
   def new
   end
 
@@ -35,6 +36,7 @@ class Users::RecruitsController < ApplicationController
 
   def show
     @recruit = Recruit.find(params[:id])
+    @user = User.find_by(id: @recruit.user_id)
   end
 
   def edit
@@ -42,7 +44,7 @@ class Users::RecruitsController < ApplicationController
   end
 
   def update
-    @recruit = Recruit.find(params[:id])
+    @recruit = Recruit.find_by(params[:id])
     if @recruit.update(recruit_params)
       redirect_to user_path(current_user.id), notice: "記事の編集が完了しました。"
     else
@@ -53,7 +55,7 @@ class Users::RecruitsController < ApplicationController
   end
 
   def destroy
-    @recruit = Recruit.find(params[:id])
+    @recruit = Recruit.find_by(params[:id])
     @recruit.destroy
     redirect_to user_path(current_user.id), notice: "記事の削除が完了しました。"
   end

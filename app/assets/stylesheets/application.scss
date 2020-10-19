@@ -22,7 +22,34 @@
   box-sizing: border-box;
 }
 
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #333333;
+}
 
-footer {
-  height: 100px;
+.footer p {
+  coller: #9d9d9d;
+}
+
+ul {
+  list-style: none;
+}
+
+.top {
+
+}
+
+.top__btn ul {
+
+}
+
+.top__btn li {
+  width: 40%;
+}
+
+/* topページのリンクプロパティ  */
+.top__link {
+  color: black;
 }

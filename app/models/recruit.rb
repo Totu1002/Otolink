@@ -33,7 +33,7 @@ class Recruit < ApplicationRecord
   validates :stance, presence: true
   #多対多テーブルの項目も必須
   validates :prefecture_ids, presence: true
-  validates :part_ids, presence: true
+  #validates :part_ids, presence: true
   validates :genre_ids, presence: true
 
 end

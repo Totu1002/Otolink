@@ -15,14 +15,15 @@
           <%= link_to "Otolink", home_path, class: "navbar-brand" %>
         </div>
         <ul class="nav navbar-nav navbar-right">
+          <li class=""><%= link_to 'ホーム', home_path %></li>
           <li class=""><%= link_to 'Otolinkとは',about_path %></li>
+          <li class=""><%= link_to 'メンバーを探す' %></li>
+          <li class=""><%= link_to 'バンドを探す' %></li>
           <% if user_signed_in? %>
-            <li class=""><%= link_to '記事の検索' %></li>
             <li class=""><%= link_to '記事の管理' %></li>
             <li class=""><%= link_to 'マイページ', user_path(current_user.id) %></li>
             <li class=""><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% else %>
-            <li class=""><%= link_to '記事の検索' %></li>
             <li><%= link_to "新規登録", new_user_registration_path %></li>
             <li><%= link_to "ログイン", new_user_session_path %></li>
           <% end %>
@@ -35,5 +36,9 @@
   <body>
     <%= yield %>
   </body>
-  <footer></footer>
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">Portfolio App Otolink.</p>
+    </div>
+  </footer>
 </html>
