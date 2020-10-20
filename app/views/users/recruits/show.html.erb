@@ -32,13 +32,22 @@
         <% if @recruit.article_type == "メンバー募集"%>
         <tr>
           <td>
-            <p><strong>募集する性別</strong></p>
+            <p><strong>募集性別</strong></p>
             <%= @recruit.gender %>
           </td>
         </tr>
         <tr>
           <td>
-            <p><strong>募集するパート</strong></p>
+            <p><strong>募集パート</strong></p>
+            <% @recruit.parts.each do |part| %>
+              <%= part.name %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+        <% if @recruit.article_type == "バンド募集"%>
+          <td>
+            <p><strong>加入パート</strong></p>
             <% @recruit.parts.each do |part| %>
               <%= part.name %>
             <% end %>

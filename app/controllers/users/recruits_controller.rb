@@ -41,10 +41,15 @@ class Users::RecruitsController < ApplicationController
 
   def edit
     @recruit = Recruit.find(params[:id])
+    if @recruit.user == current_user
+      render "edit"
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
-    @recruit = Recruit.find_by(params[:id])
+    @recruit = Recruit.find(params[:id])
     if @recruit.update(recruit_params)
       redirect_to user_path(current_user.id), notice: "記事の編集が完了しました。"
     else
@@ -55,9 +60,17 @@ class Users::RecruitsController < ApplicationController
   end
 
   def destroy
-    @recruit = Recruit.find_by(params[:id])
+    @recruit = Recruit.find(params[:id])
     @recruit.destroy
     redirect_to user_path(current_user.id), notice: "記事の削除が完了しました。"
+  end
+
+  def search_member
+    
+  end
+
+  def search_band
+    
   end
 
   private
