@@ -1,0 +1,7 @@
+set :application, "Otolink"
+set :repo_url, "https://github.com/Totu1002/Otolink"
+
+set :deploy_to, "/home/ec2-user/Otolink"
+set :rbenv_ruby, '2.5.7'
+set :linked_files, %w{config/master.key .env}
+append :linked_dirs, "log", "public", "tmp"

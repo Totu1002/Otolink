@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 2020_10_13_165544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "type"
+    t.integer "article_type"
     t.string "title"
     t.text "body"
-    t.string "stance"
-    t.string "gender"
+    t.integer "stance"
+    t.integer "gender"
     t.boolean "is_status", default: true, null: false
   end
 
@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(version: 2020_10_13_165544) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
     t.text "introduction"
-    t.string "gender"
-    t.integer "age"
+    t.integer "gender", null: false
+    t.integer "age", null: false
     t.string "profile_image_id"
     t.boolean "is_member", default: true, null: false
     t.datetime "created_at", null: false

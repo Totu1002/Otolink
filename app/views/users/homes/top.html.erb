@@ -1,2 +1,59 @@
-<h1>Users::Homes#top</h1>
-<p>Find me in app/views/users/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="top text-center">
+      <h1>Users::Homes#top</h1>
+      <p>Find me in app/views/users/homes/top.html.erb</p>
+      <ul class="top__btn list-inline center-block">
+        <li>
+          <%= link_to '記事を探す',search_recruit_path, class: "btn btn-lg btn-block btn-warning" %>
+        </li>
+        <li>
+          <%= link_to 'メンバーを探す', class: "btn btn-lg btn-block btn-warning" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row ">
+    <h3>最新のメンバー募集記事</h3>
+    <% @recruit_members.each do |recruit_member| %>
+      <% user = User.find(recruit_member.user_id) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <div class="top__usericon col-lg-1">
+                <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              </div>
+              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+            </td>
+            <td>
+              <h4><%= link_to recruit_member.title, recruit_path(recruit_member),class: "top__link" %></h4>
+              <p>活動方向性：<%= recruit_member.stance %></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+    <h3>最新のバンド募集記事</h3>
+    <% @recruit_bands.each do |recruit_band| %>
+      <% user = User.find(recruit_band.user_id) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <div class="top__usericon col-lg-1">
+                <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              </div>
+              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+            </td>
+            <td>
+              <h4><%= link_to recruit_band.title, recruit_path(recruit_band),class: "top__link" %></h4>
+              <p>活動方向性：<%= recruit_band.stance %></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= paginate @recruit_bands %>
+    <% end %>
+  </div>
+</div>

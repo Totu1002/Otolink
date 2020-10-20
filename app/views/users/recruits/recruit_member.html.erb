@@ -1,53 +1,56 @@
 <div class="container">
   <div class="row">
-    <h1>Users::Users#edit</h1>
-    <h2>プロフィール編集ページ</h2>
-    <p>Find me in app/views/users/users/edit.html.erb</p>
+    <h2>メンバー募集投稿ページ</h2>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@recruit) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
       <table class="table">
         <tbody>
           <tr>
             <td>
-              <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-              <%= f.label :profile_image, "プロフィール画像" %>
-              <%= f.attachment_field :profile_image %>
+              <%= f.label :type, "記事の種類" %><br>
+              メンバー募集
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :is_status, "記事の状態" %><br>
+              <%= f.radio_button :is_status, :true, checked: true %>
+              <%= f.label :is_status, "公開", {value: true } %>
+              <%= f.radio_button :is_status, :false %>
+              <%= f.label :is_status, "未公開", {value: false} %>
             </td>
           </tr>
           <tr>
             <td>
               <div class="field">
-                <%= f.label :name, "ニックネーム" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                <%= f.label :title, "記事のタイトル" %><br>
+                <%= f.text_field :title, autofocus: true, autocomplete: "title", size: "60" %>
               </div>
             </td>
           </tr>
           <tr>
             <td>
               <div class="field">
-                <%= f.label :email, "メールアドレス" %><br />
-                <%= f.email_field :email, autocomplete: "email" %>
+                <%= f.label :stance, "活動の方向性" %><br>
+                <%= f.radio_button :stance, :プロ志向 %>
+                <%= f.label :stance, "プロ志向" %>
+                <%= f.radio_button :stance, :アマチュア志向 %>
+                <%= f.label :stance, "アマチュア志向" %>
               </div>
             </td>
           </tr>
           <tr>
             <td>
               <div class="field">
-                <p><strong>性別</strong></p>
-                <%= f.label :gender, "男性" %>
+                <%= f.label :gender, "募集する性別" %><br>
                 <%= f.radio_button :gender, :男性 %>
-                <%= f.label :gender, "女性" %>
+                <%= f.label :gender, "男性" %>
                 <%= f.radio_button :gender, :女性 %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :age, "年齢" %><br />
-                <%= f.number_field :age, min:0, max:100, autocomplete: "age" %>
+                <%= f.label :gender, "女性" %>
+                <%= f.radio_button :gender, :指定なし %>
+                <%= f.label :gender, "指定なし" %>
               </div>
             </td>
           </tr>
@@ -62,10 +65,9 @@
             </td>
           </tr>
           <tr>
-          <tr>
             <td>
               <div class="field">
-                <%= f.label :parts, "担当パート" %><br>
+                <%= f.label :parts, "募集パート" %><br>
                 <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
                   <%= part.label {part.check_box + part.text} %>
                 <% end %>
@@ -75,7 +77,7 @@
           <tr>
             <td>
               <div class="field">
-                <%= f.label :genres, "好きなジャンル" %><br>
+                <%= f.label :genres, "ジャンル" %><br>
                 <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
                   <%= genre.label {genre.check_box + genre.text} %>
                 <% end %>
@@ -85,15 +87,16 @@
           <tr>
             <td>
               <div class="field">
-                <%= f.label :introduction, "自己紹介" %><br>
-                <%= f.text_area :introduction, autocomplete: "introduction", size: "20x10", class: "form-control" %>
+                <%= f.label :body, "記事の内容" %><br>
+                <%= f.text_area :body, autocomplete: "body", size: "20x10", class: "form-control" %>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <%= f.hidden_field :article_type, value: 'メンバー募集' %>
       <div class="actions">
-        <%= f.submit "プロフィール更新", class: 'btn btn-default btn-success' %>
+        <%= f.submit "記事を投稿する", class: 'btn btn-default btn-success' %>
       </div>
     <% end %>
   </div>
