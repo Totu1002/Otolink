@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <h2>記事検索フォーム</h2>
+    <%= form_with url: recruit_search_path, method: :get, local: true do |f| %>
+      <table class="table">
+        <tr>
+          <td>
+            <p><strong>記事の種類</strong></p>
+            <%= f.select :article_type, ["メンバー募集", "バンド募集"] %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>活動の方向性</strong></p>
+            <%= f.select :stance, ["プロ志向", "アマチュア志向"] %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :prefectures, "活動地域" %><br>
+              <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                <%= area.label {area.check_box + area.text} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+          <td>
+            <div class="field">
+              <%= f.label :parts, "パート" %><br>
+              <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                <%= part.label {part.check_box + part.text} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :genres, "ジャンル" %><br>
+              <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                <%= genre.label {genre.check_box + genre.text} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- :search -->
+      <%= f.submit "記事を検索する", class: "btn btn-block btn-success"  %>
+    <% end %>
+  </div>
+  <div class="row">
+    <h3>検索結果一覧</h3>
+    <% @recruits.each do |recruit| %>
+      <% user = User.find(recruit.user_id) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+            </td>
+            <td>
+              <h4><%= link_to recruit.title, recruit_path(recruit),class: "top__link" %></h4>
+              <p>活動方向性：<%= recruit.stance %></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= paginate @recruits %>
+    <% end %>
+  </div>
+</div>
