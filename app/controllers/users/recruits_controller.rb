@@ -65,12 +65,48 @@ class Users::RecruitsController < ApplicationController
     redirect_to user_path(current_user.id), notice: "記事の削除が完了しました。"
   end
 
-  def search_member
-    
+  def index
+    @page_title = "投稿記事一覧"
+    @recruits = Recruit.where(is_status: true)
   end
 
-  def search_band
-    
+  def search
+    #指定した条件により分岐し記事を絞り込む
+    #scopeを用いた方がよい可読性が向上する
+
+    #ページ初期表示
+    @recruits =  Recruit.where(is_status: true).page(params[:page]).per(10)
+
+    #指定した記事種別に紐付いた記事を取得
+    if params[:article_type].present?
+      @recruits = @recruits.where(article_type: params[:article_type])
+    end
+
+    #指定した活動方針に紐付いた記事を取得
+    if params[:stance].present?
+      @recruits = @recruits.where(stance: params[:stance])
+    end
+
+    #指定した活動地域に紐付く記事を取得
+    if params[:prefecture_ids].present?
+      recruits_pref = RecruitsPrefecture.where(prefecture_id: params[:prefecture_ids])
+      recruits_pref_id = recruits_pref.select("recruit_id")
+      @recruits = @recruits.where(id: recruits_pref_id)
+    end
+
+    #指定したパートに紐付く記事を取得
+    if params[:part_ids].present?
+      recruits_part = RecruitsPart.where(part_id: params[:part_ids])
+      recruits_part_id = recruits_part.select("recruit_id")
+      @recruits = @recruits.where(id: recruits_part_id)
+    end
+
+    #指定したジャンルに紐付く記事を取得
+    if params[:genre_ids].present?
+      recruits_genre = RecruitsGenre.where(genre_id: params[:genre_ids])
+      recruits_genre_id = recruits_genre.select("recruit_id")
+      @recruits = @recruits.where(id: recruits_genre_id)
+    end
   end
 
   private

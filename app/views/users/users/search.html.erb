@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <h2>メンバー検索フォーム</h2>
+    <%= form_with url: user_search_path, method: :get, local: true do |f| %>
+      <table class="table">
+        <tr>
+          <td>
+            <p><strong>ニックネーム</strong></p>
+            <%= f.text_field :name %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label :gender, "性別" %><br>
+            <%= f.radio_button :gender, :男性 %>
+            <%= f.label :gender, "男性" %>
+            <%= f.radio_button :gender, :女性 %>
+            <%= f.label :gender, "女性" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :prefectures, "活動地域" %><br>
+              <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                <%= area.label {area.check_box + area.text} %>
+              <% end %>
+            </div>
+           </td>
+        </tr>
+          <td>
+            <div class="field">
+              <%= f.label :parts, "パート" %><br>
+              <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                <%= part.label {part.check_box + part.text} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :genres, "ジャンル" %><br>
+              <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                <%= genre.label {genre.check_box + genre.text} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- :search -->
+      <%= f.submit "ユーザーを検索する", class: "btn btn-block btn-success"  %>
+    <% end %>
+  </div>
+  <div class="row">
+    <h3>検索結果一覧</h3>
+    <% @users.each do |user| %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= paginate @users %>
+    <% end %>
+  </div>
+</div>

@@ -29,11 +29,20 @@
             <%= @recruit.stance %>
           </td>
         </tr>
+        <!-- 記事種別"メンバー募集"時view表示 -->
         <% if @recruit.article_type == "メンバー募集"%>
         <tr>
           <td>
             <p><strong>募集性別</strong></p>
             <%= @recruit.gender %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>活動地域</strong></p>
+            <% @recruit.prefectures.each do |prefecture| %>
+              <%= prefecture.name %>
+            <% end %>
           </td>
         </tr>
         <tr>
@@ -45,7 +54,16 @@
           </td>
         </tr>
         <% end %>
+        <!-- 記事種別"バンド募集"時view表示 -->
         <% if @recruit.article_type == "バンド募集"%>
+          <tr>
+            <td>
+              <p><strong>活動地域</strong></p>
+              <% @recruit.prefectures.each do |prefecture| %>
+                <%= prefecture.name %>
+              <% end %>
+            </td>
+          </tr>
           <td>
             <p><strong>加入パート</strong></p>
             <% @recruit.parts.each do |part| %>
@@ -68,7 +86,7 @@
       </tbody>
     </table>
     <% if user_signed_in? && current_user.id == @recruit.user_id %>
-      <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: 'btn btn-default btn-success' %>
+      <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: "btn btn-default btn-success" %>
     <% end %>
     <div class="">
       <h3>投稿者プロフィール</h3>
