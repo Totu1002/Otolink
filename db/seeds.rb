@@ -11,8 +11,8 @@ require 'zip'
 #管理者ログイン情報
 Admin.create!(
   name: "admin",
-  email: "admin@login.com",
-  password: "adminpassword"
+  email: "admin@admin.com",
+  password: "adminpass"
   )
 
 #Partテーブルにパートの情報を供給

@@ -24,7 +24,7 @@
               <div class="top__usericon col-lg-1">
                 <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               </div>
-              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>
             <td>
               <h4><%= link_to recruit_member.title, recruit_path(recruit_member),class: "top__link" %></h4>
@@ -44,7 +44,7 @@
               <div class="top__usericon col-lg-1">
                 <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               </div>
-              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>
             <td>
               <h4><%= link_to recruit_band.title, recruit_path(recruit_band),class: "top__link" %></h4>

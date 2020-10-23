@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :users_genres
   has_many :genres, through: :users_genres
 
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
   attachment :profile_image, destroy: false
 
   enum gender: {

@@ -58,7 +58,7 @@
           <tr>
             <td>
               <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>
             <td>
               <h4><%= link_to recruit.title, recruit_path(recruit),class: "top__link" %></h4>

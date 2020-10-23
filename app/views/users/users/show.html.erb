@@ -60,6 +60,24 @@
         <div>
           <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
         </div>
+        <div>
+          <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-defaul btn-success" %>
+        </div>
+      <% else %>
+        <!-- 他ユーザーへのDMボタンを表示 -->
+        <% if @is_room == true %>
+          <!-- 既存Roomがある場合は該当patnへのリンク -->
+          <%= link_to "メッセージを送る", room_path(@room_id), class: "btn btn-defaul btn-success" %>
+        <% else %>
+          <!-- Roomが存在しない場合には新規作成 -->
+          <%= form_with model: @room, url: rooms_path, local: true do |f| %>
+            <!-- Entryモデルへuser_idとroom_idを追加 -->
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "メッセージを送る", class: "btn btn-defaul btn-success" %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

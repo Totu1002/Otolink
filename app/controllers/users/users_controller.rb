@@ -7,6 +7,29 @@ class Users::UsersController < ApplicationController
     #投稿記事表示用メソッド
     @recruit_members = Recruit.where(user_id: @user.id, article_type: "メンバー募集")
     @recruit_bands = Recruit.where(user_id: @user.id, article_type: "バンド募集")
+
+    #DM機能用メソッド
+    #Entryモデルよりログインユーザーのレコード取得
+    @current_entry = Entry.where(user_id: current_user.id)
+    #Entryモデルより相手ユーザーのレコード取得
+    @another_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_entry.each do |current|
+        @another_entry.each do |another|
+          if current.room_id == another.room_id
+            #DM用roomが存在する場合
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      #DM用roomが存在しない場合
+      unless @is_room
+        #RoomとEntryを新規作成
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit
@@ -23,7 +46,7 @@ class Users::UsersController < ApplicationController
     end
   end
 
-  #ユーザー退会確認画面用アクション
+  #ユーザー退会確認画面用アクション...使用しないかも
   def withdrawal
   end
 

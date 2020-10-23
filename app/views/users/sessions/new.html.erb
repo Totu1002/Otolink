@@ -30,9 +30,13 @@
       </p>
     <% end %>
     <div class="field">
-      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
         <%= link_to "=>パスワードを忘れた方はこちら", new_password_path(resource_name) %><br />
       <% end %>
     </div>
+    <h4>ポートフォリオ用：管理者ログイン</h4>
+    <p>
+      <%= link_to "管理者ログイン", admin_session_path, class: "btn btn-default btn-warning" %>
+    </p>
   </div>
 </div>
