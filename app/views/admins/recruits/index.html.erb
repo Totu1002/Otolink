@@ -1,2 +1,48 @@
-<h1>Admins::Recruits#index</h1>
-<p>Find me in app/views/admins/recruits/index.html.erb</p>
+<div class="container">
+  <div class="row ">
+    <h3>投稿記事一覧</h3>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><p>記事ID</p></th>
+          <th><p>アイコン</p></th>
+          <th><p>ニックネーム</p></th>
+          <th><p>記事タイトル</p></th>
+          <th><p>ステータス</p></th>
+          <th><p>記事種別</p></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recruits.each do |recruit| %>
+          <% user = User.find(recruit.user_id) %>
+          <tr>
+            <td><%= recruit.id %></td>
+            <td>
+              <div class="top__usericon col-lg-1">
+                <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              </div>
+            </td>
+            <td><p><%= user.name %></p></td>
+            <td><p><%= recruit.title %></p></td>
+            <td><p><%= recruit.is_status %></p></td>
+            <td><p><%= recruit.article_type %></p></td>
+            <td>
+              <p><%= link_to "詳細", admins_recruit_path(recruit.id),class: "btn btn-block btn-success" %></p>
+            </td>
+            <td>
+              <p><%= link_to "編集", edit_admins_recruit_path(recruit.id),class: "btn btn-block btn-success" %></p>
+            </td>
+            <td>
+              <p><%= link_to "削除", admins_recruit_path(recruit), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default btn-block btn-danger" %></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

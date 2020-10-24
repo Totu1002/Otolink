@@ -1,6 +1,13 @@
 <div class="container">
   <div class="row">
-    <h2>Admins Log in</h2>
+    <h2>管理者ログイン</h2>
+    <h4>ポートフォリオ用：管理者情報</h4>
+    <p>
+      <strong>name  : </strong>admin<br>
+      <strong>email : </strong>admin@admin.com<br>
+      <strong>pass  : </strong>adminpass<br>
+    </p>
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email,"管理者メールアドレス" %><br />
@@ -12,19 +19,10 @@
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
-
       <div class="actions">
-        <%= f.submit "Log in" %>
+        <%= f.submit "ログイン", class: "btn btn-primary" %>
       </div>
     <% end %>
-
-    <%= render "admins/shared/links" %>
   </div>
 </div>
 

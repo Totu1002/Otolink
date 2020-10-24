@@ -1,2 +1,125 @@
-<h1>Admins::Recruits#show</h1>
-<p>Find me in app/views/admins/recruits/show.html.erb</p>
+<div class="container">
+  <div class="row">
+  <h2>投稿記事詳細ページ</h2>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <p><strong>記事の種類</strong></p>
+            <%= @recruit.article_type %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>タイトル</strong></p>
+            <%= @recruit.title %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>記事の内容</strong></p>
+            <%= @recruit.body %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>活動の方向性</strong></p>
+            <%= @recruit.stance %>
+          </td>
+        </tr>
+        <!-- 記事種別"メンバー募集"時view表示 -->
+        <% if @recruit.article_type == "メンバー募集"%>
+        <tr>
+          <td>
+            <p><strong>募集性別</strong></p>
+            <%= @recruit.gender %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>活動地域</strong></p>
+            <% @recruit.prefectures.each do |prefecture| %>
+              <%= prefecture.name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>募集パート</strong></p>
+            <% @recruit.parts.each do |part| %>
+              <%= part.name %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+        <!-- 記事種別"バンド募集"時view表示 -->
+        <% if @recruit.article_type == "バンド募集"%>
+          <tr>
+            <td>
+              <p><strong>活動地域</strong></p>
+              <% @recruit.prefectures.each do |prefecture| %>
+                <%= prefecture.name %>
+              <% end %>
+            </td>
+          </tr>
+          <td>
+            <p><strong>加入パート</strong></p>
+            <% @recruit.parts.each do |part| %>
+              <%= part.name %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+        <tr>
+          <td>
+            <p><strong>募集するジャンル</strong></p>
+            <% @recruit.genres.each do |genre| %>
+              <%= genre.name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <% if user_signed_in? && current_user.id == @recruit.user_id %>
+      <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: "btn btn-default btn-success" %>
+    <% end %>
+    <div class="">
+      <h3>投稿者プロフィール</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag(@user, :profile_image, :fill, 100, 100,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+            </td>
+          </tr>
+          <tr>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td><%= @user.gender %><%= @user.age %></td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>担当パート</strong></p>
+              <% @user.parts.each do |part| %>
+                <%= part.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>好きなジャンル</strong></p>
+              <% @user.genres.each do |genre| %>
+                <%= genre.name %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to 'プロフィール詳細', admins_user_path(@user.id), class: "btn btn-default btn-success" %>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,7 @@
             <li class=""><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% elsif admin_signed_in? %>
             <li class=""><%= link_to 'ユーザー一覧', admins_users_path, class: '' %></li>
-            <li class=""><%= link_to '投稿記事一覧', home_path, class: '' %></li>
+            <li class=""><%= link_to '投稿記事一覧', admins_recruits_path, class: '' %></li>
             <li class=""><%= link_to 'パート一覧', home_path, class: '' %></li>
             <li class=""><%= link_to 'ジャンル一覧', home_path, class: '' %></li>
             <li class=""><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: '' %></li>
@@ -35,6 +35,7 @@
             <li class=""><%= link_to "メンバーを探す",user_search_path  %></li>
             <li><%= link_to "新規登録", new_user_registration_path %></li>
             <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li><%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %></li>
           <% end %>
         </ul>
       </div>
@@ -43,11 +44,15 @@
 
   </header>
   <body>
-    <%= yield %>
+    <div id="wrapper">
+      <%= yield %>
+    </div>
   </body>
   <footer class="footer">
     <div class="container">
-      <p class="text-muted">Portfolio App Otolink.</p>
+      <div class="row">
+        <p class="text-muted">Portfolio App Otolink.</p>
+      </div>
     </div>
   </footer>
 </html>

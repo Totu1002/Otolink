@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get "rooms/index"
     get "rooms/show"
   end
+
   devise_for :admins, controllers: {
     registrations: "admins/registrations",
     passwords: "admins/passwords",
@@ -20,10 +21,15 @@ Rails.application.routes.draw do
   get "/" => "users/homes#top",as: "home"
   get "homes/about" => "users/homes#about",as: "about"
 
+  #ゲストサインイン機能
+  devise_scope :user do
+    post 'users/guest_sign_in' => 'users/sessions#new_guest'
+  end
+
   scope module: "users" do
     resources :users, only:[:index, :show, :edit, :update]
     #ユーザー論理退会アクション
-    get "user/withdrawl"=> "users#withdrawl"
+    get "user/withdrawl" => "users#withdrawl"
     patch "user/withdrawl" => "users#hide"
     #投稿記事ルーティング
     resources :recruits, only:[:new, :create,:index, :show, :edit, :update, :destroy]

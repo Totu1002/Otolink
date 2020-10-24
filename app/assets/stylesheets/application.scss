@@ -22,7 +22,16 @@
   box-sizing: border-box;
 }
 
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* footerを常に最下部に固定 */
 .footer {
+  margin-top: auto;
   bottom: 0;
   width: 100%;
   height: 30px;

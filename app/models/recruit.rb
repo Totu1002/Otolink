@@ -27,6 +27,11 @@ class Recruit < ApplicationRecord
     アマチュア志向: 2
   }
 
+  enum is_status: {
+    公開中: true,
+    非公開: false
+  }
+
   validates :title, presence: true
   validates :body, presence: true, length: {maximum: 200}
   validates :article_type, presence: true

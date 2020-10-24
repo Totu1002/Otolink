@@ -63,21 +63,26 @@
         <div>
           <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-defaul btn-success" %>
         </div>
+        <div>
+          <%= link_to 'Otolinkから退会する', user_withdrawl_path, class: 'btn btn-danger' %>
+        </div>
       <% else %>
-        <!-- 他ユーザーへのDMボタンを表示 -->
-        <% if @is_room == true %>
-          <!-- 既存Roomがある場合は該当patnへのリンク -->
-          <%= link_to "メッセージを送る", room_path(@room_id), class: "btn btn-defaul btn-success" %>
-        <% else %>
-          <!-- Roomが存在しない場合には新規作成 -->
-          <%= form_with model: @room, url: rooms_path, local: true do |f| %>
-            <!-- Entryモデルへuser_idとroom_idを追加 -->
-            <%= fields_for @entry do |e| %>
-              <%= e.hidden_field :user_id, value: @user.id %>
+        <div>
+          <!-- 他ユーザーへのDMボタンを表示 -->
+          <% if @is_room == true %>
+            <!-- 既存Roomがある場合は該当patnへのリンク -->
+            <%= link_to "メッセージを送る", room_path(@room_id), class: "btn btn-defaul btn-success" %>
+          <% else %>
+            <!-- Roomが存在しない場合には新規作成 -->
+            <%= form_with model: @room, url: rooms_path, local: true do |f| %>
+              <!-- Entryモデルへuser_idとroom_idを追加 -->
+              <%= fields_for @entry do |e| %>
+                <%= e.hidden_field :user_id, value: @user.id %>
+              <% end %>
+              <%= f.submit "メッセージを送る", class: "btn btn-defaul btn-success" %>
             <% end %>
-            <%= f.submit "メッセージを送る", class: "btn btn-defaul btn-success" %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div>
   </div>
@@ -102,11 +107,7 @@
             <tr>
               <td><%= recruit_member.title %></td>
               <td>
-                <% if recruit_member.is_status == true %>
-                  <p>公開中</p>
-                <% else %>
-                  <p>非公開</p>
-                <% end %>
+                <%= recruit_member.is_status %>
               </td>
               <td>
                 <%= link_to "詳細", recruit_path(recruit_member), class: "btn btn-default btn-block btn-success" %>
@@ -143,11 +144,7 @@
             <tr>
               <td><%= recruit_band.title %></td>
               <td>
-                <% if recruit_band.is_status == true %>
-                  <p>公開中</p>
-                <% else %>
-                  <p>非公開</p>
-                <% end %>
+                <%= recruit_band.is_status %>
               </td>
               <td>
                 <%= link_to "詳細", recruit_path(recruit_band), class: "btn btn-default btn-block btn-success" %>

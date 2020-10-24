@@ -1,2 +1,106 @@
-<h1>Admins::Recruits#edit</h1>
-<p>Find me in app/views/admins/recruits/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h2>記事編集ページ</h2>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
+    <%= form_with model: @recruit, url: admins_recruit_path(@recruit.id),local: true do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= f.label :is_status, "記事の種類" %><br>
+              <%= @recruit.article_type %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :is_status, "記事の状態" %><br>
+              <%= f.radio_button :is_status, :公開中, checked: true %>
+              <%= f.label :is_status, "公開" %>
+              <%= f.radio_button :is_status, :非公開 %>
+              <%= f.label :is_status, "未公開" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :title, "記事のタイトル" %><br>
+                <%= f.text_field :title, autofocus: true, autocomplete: "title", size: "60" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :stance, "活動の方向性" %><br>
+                <%= f.radio_button :stance, :プロ志向 %>
+                <%= f.label :stance, "プロ志向" %>
+                <%= f.radio_button :stance, :アマチュア志向 %>
+                <%= f.label :stance, "アマチュア志向" %>
+              </div>
+            </td>
+          </tr>
+          <% if @recruit.article_type == "メンバー募集"%>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :gender, "募集する性別" %><br>
+                <%= f.radio_button :gender, :男性 %>
+                <%= f.label :gender, "男性" %>
+                <%= f.radio_button :gender, :女性 %>
+                <%= f.label :gender, "女性" %>
+                <%= f.radio_button :gender, :指定なし %>
+                <%= f.label :gender, "指定なし" %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :prefectures, "活動地域" %><br>
+                <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                  <%= area.label {area.check_box + area.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <% if @recruit.article_type == "メンバー募集"%>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :parts, "募集パート" %><br>
+                <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                  <%= part.label {part.check_box + part.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :genres, "ジャンル" %><br>
+                <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                  <%= genre.label {genre.check_box + genre.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :body, "記事の内容" %><br>
+                <%= f.text_area :body, autocomplete: "body", size: "20x10", class: "form-control" %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= f.submit "記事を更新する", class: 'btn btn-default btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

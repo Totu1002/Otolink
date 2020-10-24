@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1>Users::Recruits#edit</h1>
     <h2>記事編集ページ</h2>
-    <p>Find me in app/views/users/recruits/edit.html.erb</p>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <%= form_for(@recruit) do |f| %>
@@ -18,10 +16,10 @@
           <tr>
             <td>
               <%= f.label :is_status, "記事の状態" %><br>
-              <%= f.radio_button :is_status, :true, checked: true %>
-              <%= f.label :is_status, "公開", {value: true } %>
-              <%= f.radio_button :is_status, :false %>
-              <%= f.label :is_status, "未公開", {value: false} %>
+              <%= f.radio_button :is_status, :公開中, checked: true %>
+              <%= f.label :is_status, "公開" %>
+              <%= f.radio_button :is_status, :非公開 %>
+              <%= f.label :is_status, "未公開" %>
             </td>
           </tr>
           <tr>

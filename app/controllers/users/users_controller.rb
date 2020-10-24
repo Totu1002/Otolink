@@ -46,12 +46,18 @@ class Users::UsersController < ApplicationController
     end
   end
 
-  #ユーザー退会確認画面用アクション...使用しないかも
+  #ユーザー退会確認画面用アクション
   def withdrawal
+    @user = current_user
   end
 
   #ユーザー論理退会用アクション
   def hide
+    @user = current_user
+    @user.update(is_member: "無効")
+    #sessionIDのresetを行う
+    reset_session
+    redirect_to home_path
   end
 
   def search
@@ -62,32 +68,32 @@ class Users::UsersController < ApplicationController
     @users = User.where(is_member: true).page(params[:page]).per(10)
 
     if params[:name].present?
-      @users = User.where(['name LIKE ?', "%#{params[:name]}%"])
+      @users = User.where(['name LIKE ?', "%#{params[:name]}%"]).page(params[:page]).per(10)
     end
 
     if params[:gender].present?
-      @users = @users.where(gender: params[:gender])
+      @users = @users.where(gender: params[:gender]).page(params[:page]).per(10)
     end
 
     #指定した活動地域に紐付くユーザーを取得
     if params[:prefecture_ids].present?
       users_pref = UsersPrefecture.where(prefecture_id: params[:prefecture_ids])
       users_pref_id = users_pref.select("user_id")
-      @users = @users.where(id: users_pref_id)
+      @users = @users.where(id: users_pref_id).page(params[:page]).per(10)
     end
 
     #指定したパートに紐付くユーザーを取得
     if params[:part_ids].present?
       users_part = UsersPart.where(part_id: params[:part_ids])
       users_part_id = users_part.select("user_id")
-      @users = @users.where(id: users_part_id)
+      @users = @users.where(id: users_part_id).page(params[:page]).per(10)
     end
 
     #指定したジャンルに紐付くユーザーを取得
     if params[:genre_ids].present?
       users_genre = UsersGenre.where(genre_id: params[:genre_ids])
       users_genre_id = users_genre.select("user_id")
-      @users = @users.where(id: users_genre_id)
+      @users = @users.where(id: users_genre_id).page(params[:page]).per(10)
     end
   end
 
