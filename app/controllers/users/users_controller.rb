@@ -67,7 +67,7 @@ class Users::UsersController < ApplicationController
     #scopeを用いた方がよい可読性が向上する
 
     #ページ初期表示
-    @users = User.where(is_member: true).page(params[:page]).per(10)
+    @users = User.where(is_member: "有効").page(params[:page]).per(10)
 
     if params[:name].present?
       @users = User.where(['name LIKE ?', "%#{params[:name]}%"]).page(params[:page]).per(10)

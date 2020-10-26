@@ -1,6 +1,8 @@
 <div class="container body-wrapper">
   <div class="row">
-    <h2>プロフィール編集ページ</h2>
+    <div class="page_title">
+      <h2>プロフィール編集ページ</h2>
+    </div>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <%= form_with model: @user, url: admins_user_path(@user.id),local: true do |f| %>
@@ -91,7 +93,7 @@
         </tbody>
       </table>
       <div class="actions">
-        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success" %>
+        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success bs_btn" %>
       </div>
     <% end %>
   </div>

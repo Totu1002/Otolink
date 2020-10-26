@@ -1,6 +1,8 @@
 <div class="container body-wrapper">
   <div class="row">
-  <h2>投稿記事詳細ページ</h2>
+    <div class="page_title">
+      <h2>投稿記事詳細ページ</h2>
+    </div>
     <table class="table">
       <tbody>
         <tr>
@@ -87,7 +89,9 @@
       <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: "btn btn-default btn-success" %>
     <% end %>
     <div class="">
-      <h3>投稿者プロフィール</h3>
+      <div class="page_title">
+        <h3>投稿者プロフィール</h3>
+      </div>
       <table class="table">
         <tbody>
           <tr>
@@ -119,7 +123,7 @@
           </tr>
         </tbody>
       </table>
-      <%= link_to 'プロフィール詳細', admins_user_path(@user.id), class: "btn btn-default btn-success" %>
+      <%= link_to 'プロフィール詳細', admins_user_path(@user.id), class: "btn btn-default btn-success bs_btn" %>
     </div>
   </div>
 </div>

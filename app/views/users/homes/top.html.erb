@@ -8,15 +8,18 @@
       </div>
       <ul class="top__btn list-inline center-block">
         <li>
-          <%= link_to '記事を探す',recruit_search_path, class: "btn btn-lg btn-block btn-warning" %>
+          <%= link_to recruit_search_path, class: "btn btn-lg btn-block btn-warning" do %>
+            <i class="fa fa-search" aria-hidden="true"></i>記事を探す
+          <% end %>
         </li>
         <li>
-          <%= link_to 'メンバーを探す',user_search_path, class: "btn btn-lg btn-block btn-warning" %>
+          <%= link_to user_search_path, class: "btn btn-lg btn-block btn-warning" do %>
+            <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
+          <% end %>
         </li>
       </ul>
     </div>
-    <div class="top__item col-lg-12"></div>
-      <div>
+      <div class="page_title">
         <h3>最新のメンバー募集記事</h3>
       </div>
       <% @recruit_members.each do |recruit_member| %>
@@ -25,7 +28,7 @@
           <tbody>
             <tr>
               <td>
-                <div class="top__usericon col-lg-1">
+                <div class="top__usericon">
                   <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
                 </div>
               </td>
@@ -40,7 +43,9 @@
           </tbody>
         </table>
       <% end %>
-      <h3>最新のバンド募集記事</h3>
+      <div class="page_title">
+        <h3>最新のバンド募集記事</h3>
+      </div>
       <% @recruit_bands.each do |recruit_band| %>
         <% user = User.find(recruit_band.user_id) %>
         <table class="table">

@@ -1,6 +1,13 @@
 <div class="container body-wrapper">
   <div class="row">
-    <h2>マイページ トップ</h2>
+    <div class="page_title">
+      <h2>マイページ トップ</h2>
+    </div>
+    <div style="background-color: #f0ad4e">
+      <% if @user.is_member == "無効" %>
+        <h3>退会済みユーザー</h3>
+      <% end %>
+    </div>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <div class="">
@@ -69,7 +76,7 @@
           </li>
         </ul>
       <% else %>
-        <% if user_signed_in? %>
+        <% if user_signed_in? && @user.is_member == "有効" %>
         <!-- DM機能 -->
           <div>
             <!-- 他ユーザーへのDMボタンを表示 -->
@@ -97,7 +104,9 @@
   </div>
   <% if user_signed_in? && current_user.id == @user.id %>
     <div class="row">
-    <h2>記事の管理</h2>
+      <div class="page_title">
+        <h2>記事の管理</h2>
+      </div>
     <h3>メンバー募集記事</h3>
     <% if Recruit.where(user_id: @user.id, article_type: "メンバー募集").exists? %>
       <% @recruit_members.each do |recruit_member| %>

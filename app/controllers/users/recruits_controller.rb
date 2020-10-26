@@ -76,7 +76,8 @@ class Users::RecruitsController < ApplicationController
     #scopeを用いた方がよい可読性が向上する
 
     #ページ初期表示
-    @recruits =  Recruit.where(is_status: true).page(params[:page]).per(10)
+    user = User.where(is_member: "有効")
+    @recruits =  Recruit.where(is_status: "公開中",user_id: user.ids).page(params[:page]).per(10)
 
     #指定した記事種別に紐付いた記事を取得
     if params[:article_type].present?

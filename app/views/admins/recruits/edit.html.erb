@@ -1,6 +1,8 @@
 <div class="container body-wrapper">
   <div class="row">
-    <h2>記事編集ページ</h2>
+    <div class="page_title">
+      <h2>記事編集ページ</h2>
+    </div>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <%= form_with model: @recruit, url: admins_recruit_path(@recruit.id),local: true do |f| %>
@@ -99,7 +101,7 @@
         </tbody>
       </table>
       <div class="actions">
-        <%= f.submit "記事を更新する", class: 'btn btn-default btn-success' %>
+        <%= f.submit "記事を更新する", class: 'btn btn-default btn-success bs_btn' %>
       </div>
     <% end %>
   </div>
