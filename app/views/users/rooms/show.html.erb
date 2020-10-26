@@ -1,0 +1,50 @@
+<div class="container body-wrapper">
+  <div class="row">
+    <div class="page_title">
+      <h2>メッセージフォーム</h2>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>送信者</th>
+          <th>メッセージ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @room.messages.each do |message| %>
+          <tr>
+            <td>
+              <%= link_to message.user.name, user_path(message.user.id) %>
+              <% if message.user.is_member == "無効" %>
+                <% @user = false %>
+                <p><退会済みユーザー></p>
+              <% end %>
+            </td>
+            <td>
+              <%= message.body %>
+            </td>
+            <td>
+              <% if message.user == current_user %>
+                <%= link_to '削除', message, method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-defaul btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% if @user != false %>
+    <div class="row">
+      <%= form_with model: @message, url: messages_path, local: true do |f| %>
+        <div class="dm_form">
+          <%= f.text_area :body, size: "20x10", class: "form-control" %>
+        </div>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <div class="text-center">
+          <%= f.submit "メッセージを送信", class: "btn btn-defaul btn-info bs_btn" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

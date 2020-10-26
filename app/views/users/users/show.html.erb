@@ -1,34 +1,39 @@
-<h1>Users::Users#show</h1>
-<p>Find me in app/views/users/users/show.html.erb</p>
-<div class="container">
+<div class="container body-wrapper">
   <div class="row">
+    <div class="page_title">
+      <h2>マイページ トップ</h2>
+    </div>
+    <div style="background-color: #f0ad4e">
+      <% if @user.is_member == "無効" %>
+        <h3>退会済みユーザー</h3>
+      <% end %>
+    </div>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
     <div class="">
-      <table class="table">
+      <table class="table text-center">
         <tbody>
           <tr>
             <tb>
-              <%=%>
+              <div class="text-center" style="padding: 2%;">
+                <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              </div>
             </tb>
           </tr>
           <tr>
-            <td>ユーザー名</td>
+            <td><p><strong>ユーザー名</strong></p></td>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td>メールアドレス</td>
-            <td><%= @user.email %></td>
-            <td><%= link_to "変更" %></td>
-          </tr>
-          <tr>
-            <td>性別</td>
+            <td><p><strong>性別</strong></p></td>
             <td><%= @user.gender %></td>
           </tr>
           <tr>
-            <td>年齢</td>
+            <td><p><strong>年齢</strong></p></td>
             <td><%= @user.age %></td>
           </tr>
           <tr>
-            <td>活動エリア</td>
+            <td><p><strong>活動エリア</strong></p></td>
             <td>
               <% @user.prefectures.each do |pref| %>
                 <%= pref.name %>
@@ -36,7 +41,7 @@
             </td>
           </tr>
           <tr>
-            <td>担当パート</td>
+            <td><p><strong>担当パート</strong></p></td>
             <td>
               <% @user.parts.each do |part| %>
                 <%= part.name %>
@@ -44,7 +49,7 @@
             </td>
           </tr>
           <tr>
-            <td>好みのジャンル</td>
+            <td><p><strong>好みのジャンル</strong></p></td>
             <td>
               <% @user.genres.each do |genre| %>
                 <%= genre.name %>
@@ -53,14 +58,129 @@
           </tr>
           </tr>
           <tr>
-            <td>自己紹介文</td>
+            <td><p><strong>自己紹介文<strong></p></td>
             <td><%= @user.introduction %></td>
-          </tr>
-          <tr>
-            <td><%= link_to "プロフィールを変更" %></td>
           </tr>
         </tbody>
       </table>
+      <% if user_signed_in? && current_user.id == @user.id %>
+        <ul class="list-inline center-block text-center">
+          <li class="">
+            <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
+          </li>
+          <li class="">
+            <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-defaul btn-success" %>
+          </li>
+          <li class="">
+            <%= link_to 'Otolinkから退会する', user_withdrawl_path, class: 'btn btn-danger' %>
+          </li>
+        </ul>
+      <% else %>
+        <% if user_signed_in? && @user.is_member == "有効" %>
+        <!-- DM機能 -->
+          <div>
+            <!-- 他ユーザーへのDMボタンを表示 -->
+            <% if @is_room == true %>
+              <!-- 既存Roomがある場合は該当patnへのリンク -->
+              <div class="bs_btn text-center">
+                <%= link_to "メッセージを送る", room_path(@room_id), class: "btn btn-defaul btn-success" %>
+              </div>
+            <% else %>
+              <!-- Roomが存在しない場合には新規作成 -->
+              <%= form_with model: @room, url: rooms_path, local: true do |f| %>
+                <!-- Entryモデルへuser_idとroom_idを追加 -->
+                <%= fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <div class="bs_btn text-center">
+                  <%= f.submit "メッセージを送る", class: "btn btn-defaul btn-success" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
+  <% if user_signed_in? && current_user.id == @user.id %>
+    <div class="row">
+      <div class="page_title">
+        <h2>記事の管理</h2>
+      </div>
+    <h3>メンバー募集記事</h3>
+    <% if Recruit.where(user_id: @user.id, article_type: "メンバー募集").exists? %>
+      <% @recruit_members.each do |recruit_member| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>公開ステータス</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= recruit_member.title %></td>
+              <td>
+                <%= recruit_member.is_status %>
+              </td>
+              <td>
+                <%= link_to "詳細", recruit_path(recruit_member), class: "btn btn-default btn-block btn-success" %>
+              </td>
+              <td>
+                <%= link_to "編集", edit_recruit_path(recruit_member), class: "btn btn-default btn-block btn-success" %>
+              </td>
+              <td>
+                <%= link_to "削除", recruit_path(recruit_member), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default btn-block btn-danger" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <p>投稿された記事はありません</p>
+      <%= link_to "新規記事投稿", user_recruit_member_path,class: "btn btn-default btn-success bs_btn" %>
+    <% end %>
+    <h3>バンド募集記事</h3>
+    <% if Recruit.where(user_id: @user.id,article_type: "バンド募集").exists? %>
+      <% @recruit_bands.each do |recruit_band| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>公開ステータス</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= recruit_band.title %></td>
+              <td>
+                <%= recruit_band.is_status %>
+              </td>
+              <td>
+                <%= link_to "詳細", recruit_path(recruit_band), class: "btn btn-default btn-block btn-success" %>
+              </td>
+              <td>
+                <%= link_to "編集", edit_recruit_path(recruit_band),class: "btn btn-default btn-block btn-success" %>
+              </td>
+              <td>
+                <%= link_to "削除", recruit_path(recruit_band), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default btn-block btn-danger" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <p>投稿された記事はありません</p>
+      <%= link_to "新規記事投稿", user_recruit_band_path,class: 'btn btn-default btn-success bs_btn' %>
+    <% end %>
+  </div>
+  <% end %>
 </div>

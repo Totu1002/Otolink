@@ -1,2 +1,100 @@
-<h1>Users::Users#edit</h1>
-<p>Find me in app/views/users/users/edit.html.erb</p>
+<div class="container body-wrapper">
+  <div class="row">
+    <div class="page_title">
+      <h2>プロフィール編集ページ</h2>
+    </div>
+    <p class="alert-success"><%= notice %></p>
+    <p class="alert-danger"><%= alert %></p>
+    <%= form_for(@user) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <%= f.label :profile_image, "プロフィール画像" %>
+              <%= f.attachment_field :profile_image %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :name, "ニックネーム" %><br />
+                <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :email, "メールアドレス" %><br />
+                <%= f.email_field :email, autocomplete: "email" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <p><strong>性別</strong></p>
+                <%= f.label :gender, "男性" %>
+                <%= f.radio_button :gender, :男性 %>
+                <%= f.label :gender, "女性" %>
+                <%= f.radio_button :gender, :女性 %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :age, "年齢" %><br />
+                <%= f.number_field :age, min:0, max:100, autocomplete: "age" %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :prefectures, "活動地域" %><br>
+                <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                  <%= area.label {area.check_box + area.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :parts, "担当パート" %><br>
+                <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                  <%= part.label {part.check_box + part.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :genres, "好きなジャンル" %><br>
+                <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                  <%= genre.label {genre.check_box + genre.text} %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="field">
+                <%= f.label :introduction, "自己紹介" %><br>
+                <%= f.text_area :introduction, autocomplete: "introduction", size: "20x10", class: "form-control" %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success bs_btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

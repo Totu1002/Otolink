@@ -4,21 +4,107 @@
     <title>Otolink</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <header>
-    <!-- テスト用ヘッダー -->
-    <% if user_signed_in? %>
-      <%= link_to 'マイページ', user_path(current_user.id) %> |
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %> |
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+    <div class="">
+      <div class="">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <%= link_to "Otolink", home_path, class: "navbar-brand" %>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class=""><%= link_to home_path do %>
+                <i class="fa fa-home" aria-hidden="true"></i>ホーム
+              <% end %>
+              </li>
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to about_path do %>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to recruit_search_path do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>記事を探す
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to user_search_path do %>
+                    <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to user_path(current_user.id) do %>
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>マイページ
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, method: :delete do %>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>ログアウト
+                  <% end %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li>
+                  <%= link_to admins_users_path do %>
+                    <i class="fa fa-users" aria-hidden="true"></i>ユーザー一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admins_recruits_path do %>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>投稿記事一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, method: :delete do %>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>ログアウト
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to about_path do %>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to recruit_search_path do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>記事を探す
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to user_search_path do %>
+                    <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_registration_path do %>
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>新規登録
+                    <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_session_path do %>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>ログイン
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
   </header>
   <body>
-    <%= yield %>
+    <div id="wrapper">
+      <%= yield %>
+    </div>
   </body>
+  <footer class="footer">
+    <div class="container">
+      <div class="">
+        <p class="text-muted">Portfolio App Otolink.</p>
+      </div>
+    </div>
+  </footer>
 </html>

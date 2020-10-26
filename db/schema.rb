@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_165544) do
+ActiveRecord::Schema.define(version: 2020_10_22_045736) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,10 +25,29 @@ ActiveRecord::Schema.define(version: 2020_10_13_165544) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "parts", force: :cascade do |t|
@@ -47,11 +66,11 @@ ActiveRecord::Schema.define(version: 2020_10_13_165544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "type"
+    t.integer "article_type"
     t.string "title"
     t.text "body"
-    t.string "stance"
-    t.string "gender"
+    t.integer "stance"
+    t.integer "gender"
     t.boolean "is_status", default: true, null: false
   end
 
@@ -76,16 +95,21 @@ ActiveRecord::Schema.define(version: 2020_10_13_165544) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
     t.text "introduction"
-    t.string "gender"
-    t.integer "age"
+    t.integer "gender", null: false
+    t.integer "age", null: false
     t.string "profile_image_id"
     t.boolean "is_member", default: true, null: false
     t.datetime "created_at", null: false

@@ -1,0 +1,24 @@
+<div class="container body-wrapper withdrawl">
+  <div class="row">
+    <div class="">
+      <div class="withdrawl__title">
+        <h2><strong>退会確認ページ</strong></h2>
+      </div>
+      <div class="withdrawl__body">
+        <p>
+          退会すると、募集記事の投稿や<br>
+          メッセージ機能が使用できなくなります。<br>
+          <br>
+          退会する場合は、「退会する」をクリックしてください。<br>
+          <br>
+          ※なお、退会後に再度、同じアカウントでログインしたい場合には、<br>
+           管理者(*****@***.com)までその旨ご連絡ください。<br>
+        </p>
+        <p>
+          <%= link_to "退会しない", user_path(current_user.id), class: "btn btn-primary" %>
+          <%= link_to "退会する", user_withdrawl_path(current_user), method: :patch, class: "btn btn-danger" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
