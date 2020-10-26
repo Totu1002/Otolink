@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container body-wrapper">
   <div class="row">
     <h2>バンド募集投稿ページ</h2>
     <p class="alert-success"><%= notice %></p>
@@ -16,10 +16,10 @@
           <tr>
             <td>
               <%= f.label :is_status, "記事の状態" %><br>
-              <%= f.radio_button :is_status, :true, checked: true %>
-              <%= f.label :is_status, "公開", {value: true } %>
-              <%= f.radio_button :is_status, :false %>
-              <%= f.label :is_status, "未公開", {value: false} %>
+              <%= f.radio_button :is_status, :公開中, checked: true %>
+              <%= f.label :is_status, "公開" %>
+              <%= f.radio_button :is_status, :非公開 %>
+              <%= f.label :is_status, "未公開" %>
             </td>
           </tr>
           <tr>
@@ -84,7 +84,7 @@
       <%= f.hidden_field :article_type, value: "バンド募集" %>
       <%= f.hidden_field :gender, value: "指定なし" %>
       <div class="actions">
-        <%= f.submit "記事を投稿する", class: 'btn btn-default btn-success' %>
+        <%= f.submit "記事を投稿する", class: "btn btn-default btn-success bs_btn" %>
       </div>
     <% end %>
   </div>

@@ -13,8 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 * {
   margin: 0;
@@ -27,7 +30,19 @@ body,
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: 'Awesome Font', sans-serif;
+  background-image: url(back_img.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
 }
+
+#wrapper {
+  background: #ffffff;
+  margin: 2% 5%;
+}
+
 
 /* footerを常に最下部に固定 */
 .footer {
@@ -58,7 +73,76 @@ ul {
   width: 40%;
 }
 
-/* topページのリンクプロパティ  */
+/* topページ画像 */
+.top__img {
+  padding: 5%;
+  width: 100%;
+}
+
+/* topページ内リンク */
 .top__link {
   color: black;
+}
+
+.top__item {
+  padding: 10px;
+}
+
+/* bootstrap ボタン余白 */
+.bs_btn {
+  margin-bottom: 20px;
+}
+
+/* ユーザーログイン画面 */
+/* フォームレイアウト */
+.form-wrapper {
+  /* background: #333333; */
+  /* color:white; */
+  background: #ffffff;
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 370px;
+  /* border: solid 1px #000000; */
+}
+
+.form-wrapper h1 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+.form {
+  padding: 0 1.5em;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item-input {
+  width: 100%;
+  text-align: center;
+}
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+  text-align: center;
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+/* 退会確認ページ */
+.withdrawl {
+  text-align: center;
+  margin: auto;
+}
+
+/* DM機能 form */
+.dm_form {
+  margin-bottom: 20px;
 }

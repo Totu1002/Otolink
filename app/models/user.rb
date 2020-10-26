@@ -42,19 +42,14 @@ class User < ApplicationRecord
 
   #ゲストサインイン機能アクション
   def self.guest
-    #user = User.find_or_create_by!(email: "guest@guest.com") do |user|
     user = User.find_or_initialize_by(email: "guest@guest.com") do |user|
       #パスワードランダム生成→固定でもよいか？
       user.name = "guest"
       user.password = SecureRandom.urlsafe_base64
       user.age = 20
       user.gender = "男性"
-      #これだとテーブルに追加してしまう
-      #user.prefectures.build(name: "東京都")
       user.prefectures = Prefecture.where(name: "東京都")
-      #user.parts.build(name: "その他")
       user.parts = Part.where(name: "その他")
-      #user.genres.build(name: "その他")
       user.genres = Genre.where(name: "その他")
       #Confirmable を使用している場合は必要
       #user.confirmed_at = Time.now

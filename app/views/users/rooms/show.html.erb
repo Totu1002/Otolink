@@ -1,7 +1,6 @@
-<h1>Users::Rooms#show</h1>
-<p>Find me in app/views/users/rooms/show.html.erb</p>
-<div class="container">
+<div class="container body-wrapper">
   <div class="row">
+    <h2>メッセージフォーム</h2>
     <table class="table">
       <thead>
         <tr>
@@ -14,7 +13,7 @@
         <% @room.messages.each do |message| %>
           <tr>
             <td>
-              <%= link_to user_path(message.user), message.user.name %>
+              <%= link_to message.user.name, user_path(message.user.id) %>
             </td>
             <td>
               <%= message.body %>
@@ -31,9 +30,13 @@
   </div>
   <div class="row">
     <%= form_with model: @message, url: messages_path, local: true do |f| %>
-      <%= f.text_area :body, size: "20x10", class: "form-control" %>
+      <div class="dm_form">
+        <%= f.text_area :body, size: "20x10", class: "form-control" %>
+      </div>
       <%= f.hidden_field :room_id, value: @room.id %>
-      <%= f.submit "送信", class: "btn btn-info btn-block" %>
+      <div class="text-center">
+        <%= f.submit "メッセージを送信", class: "btn btn-defaul btn-info" %>
+      </div
     <% end %>
   </div>
 </div>
