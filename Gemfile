@@ -76,6 +76,7 @@ gem 'pry-rails'
 gem 'active_hash'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'font-awesome-rails'
 
 gem 'dotenv-rails'
 group :production do

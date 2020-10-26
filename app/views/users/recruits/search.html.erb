@@ -1,6 +1,10 @@
-<div class="container">
+<div class="container body-wrapper">
   <div class="row">
-    <h2>記事検索フォーム</h2>
+    <div class="page_title">
+      <div class="page_title">
+        <h2>記事検索フォーム</h2>
+      </div>
+    </div>
     <%= form_with url: recruit_search_path, method: :get, local: true do |f| %>
       <table class="table">
         <tr>
@@ -50,7 +54,9 @@
     <% end %>
   </div>
   <div class="row">
-    <h3>検索結果一覧</h3>
+    <div class="page_title">
+      <h3>検索結果一覧</h3>
+    </div>
     <% @recruits.each do |recruit| %>
       <% user = User.find(recruit.user_id) %>
       <table class="table">
@@ -58,7 +64,7 @@
           <tr>
             <td>
               <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-              <p><%= user.name %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>
             <td>
               <h4><%= link_to recruit.title, recruit_path(recruit),class: "top__link" %></h4>

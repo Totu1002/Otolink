@@ -1,0 +1,30 @@
+<div class="container body-wrapper">
+  <div class="row">
+    <div class="page_title">
+      <h2>メッセージ一覧</h2>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>メッセージ相手</th>
+          <th>メッセージ内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @another_entries.each do |entry|%>
+          <tr>
+            <td>
+              <%= link_to entry.user.name, user_path(entry.user) %>
+              <% if entry.user.is_member == "無効" %>
+                <p><退会済みユーザー></p>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to Message.find_by(id: entry.room.message_ids.last)&.body, room_path(entry.room) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

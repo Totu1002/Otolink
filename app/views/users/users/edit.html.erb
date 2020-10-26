@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container body-wrapper">
   <div class="row">
-    <h1>Users::Users#edit</h1>
-    <h2>プロフィール編集ページ</h2>
-    <p>Find me in app/views/users/users/edit.html.erb</p>
+    <div class="page_title">
+      <h2>プロフィール編集ページ</h2>
+    </div>
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <%= form_for(@user) do |f| %>
@@ -93,7 +93,7 @@
         </tbody>
       </table>
       <div class="actions">
-        <%= f.submit "プロフィール更新", class: 'btn btn-default btn-success' %>
+        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success bs_btn" %>
       </div>
     <% end %>
   </div>
