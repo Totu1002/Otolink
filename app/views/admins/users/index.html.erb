@@ -24,7 +24,7 @@
           <tr>
             <td><%= user.id %></td>
             <td>
-              <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
             </td>
             <td><p><%= user.name %></p></td>
             <td><p><%= user.email %></p></td>

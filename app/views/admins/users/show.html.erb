@@ -11,7 +11,7 @@
           <tr>
             <tb>
               <div class="text-center" style="padding: 2%;">
-                <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+                <%= attachment_image_tag(@user, :profile_image, size: "200x200",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               </div>
             </tb>
           </tr>

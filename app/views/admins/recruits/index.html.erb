@@ -26,7 +26,7 @@
             <td><%= recruit.id %></td>
             <td>
               <div class="top__usericon col-lg-1">
-                <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+                <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               </div>
             </td>
             <td><p><%= user.name %></p></td>

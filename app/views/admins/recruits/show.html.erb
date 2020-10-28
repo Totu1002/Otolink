@@ -96,7 +96,7 @@
         <tbody>
           <tr>
             <td>
-              <%= attachment_image_tag(@user, :profile_image, :fill, 100, 100,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <%= attachment_image_tag(@user, :profile_image, size: "100x100",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
             </td>
           </tr>
           <tr>
