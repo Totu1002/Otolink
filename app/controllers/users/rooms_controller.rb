@@ -18,6 +18,12 @@ class Users::RoomsController < ApplicationController
     end
     # さらにuser_idがログインユーザーでは無いレコードを抽出
     @another_entries = Entry.where(room_id: my_room_ids).where.not(user_id: current_user.id)
+
+    #通知機能-既読用
+    @notifications = current_user.passive_notifications.page(params[:page]).per(20)
+    @notifications.where(checked: false).each do |notification|
+      notification.update_attributes(checked: true)
+    end
   end
 
   def show
