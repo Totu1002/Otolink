@@ -13,14 +13,15 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <%= link_to "Otolink", home_path, class: "navbar-brand" %>
+              <%= link_to "Otolink", root_path, class: "navbar-brand" %>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li class=""><%= link_to home_path do %>
+              <li class=""><%= link_to root_path do %>
                 <i class="fa fa-home" aria-hidden="true"></i>ホーム
               <% end %>
               </li>
               <% if user_signed_in? %>
+                <!-- ログイン時ヘッダー -->
                 <li>
                   <%= link_to about_path do %>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは
@@ -37,6 +38,18 @@
                   <% end %>
                 </li>
                 <li>
+                  <%= link_to rooms_path do %>
+                    <% if unchecked_notifications.any? %>
+                      <span class="fa-stack n-stack">
+                        <i class="fa fa-envelope fa-stack-2x n-envelope"></i>
+                        <i class="fa fa-circle fa-stack-1x n-circle"></i>
+                      </span>メッセージ
+                    <% else %>
+                      <i class="fa fa-envelope" aria-hidden="true"></i>メッセージ
+                    <% end %>
+                  <% end %>
+                </li>
+                <li>
                   <%= link_to user_path(current_user.id) do %>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>マイページ
                   <% end %>
@@ -47,6 +60,7 @@
                   <% end %>
                 </li>
               <% elsif admin_signed_in? %>
+                <!-- 管理者用ヘッダー -->
                 <li>
                   <%= link_to admins_users_path do %>
                     <i class="fa fa-users" aria-hidden="true"></i>ユーザー一覧
@@ -63,6 +77,7 @@
                   <% end %>
                 </li>
               <% else %>
+                <!-- 非ログイン時ヘッダー -->
                 <li>
                   <%= link_to about_path do %>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは

@@ -63,43 +63,57 @@
           </tr>
         </tbody>
       </table>
-      <% if user_signed_in? && current_user.id == @user.id %>
-        <ul class="list-inline center-block text-center">
-          <li class="">
+      <ul class="list-inline center-block text-center">
+        <% if user_signed_in? && current_user.id == @user.id %>
+          <li>
             <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
           </li>
-          <li class="">
+          <li>
             <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-defaul btn-success" %>
           </li>
-          <li class="">
-            <%= link_to 'Otolinkから退会する', user_withdrawl_path, class: 'btn btn-danger' %>
+          <li>
+            <%= link_to "お気に入りユーザー一覧", following_user_path(@user.id), class: "btn btn-defaul btn-success" %>
           </li>
-        </ul>
-      <% else %>
-        <% if user_signed_in? && @user.is_member == "有効" %>
-        <!-- DM機能 -->
-          <div>
+          <li>
+            <%= link_to "Otolinkから退会する", user_withdrawl_path, class: 'btn btn-danger' %>
+          </li>
+        <% else %>
+          <% if user_signed_in? && @user.is_member == "有効" %>
+            <!-- DM機能 -->
             <!-- 他ユーザーへのDMボタンを表示 -->
-            <% if @is_room == true %>
-              <!-- 既存Roomがある場合は該当patnへのリンク -->
-              <div class="bs_btn text-center">
-                <%= link_to "メッセージを送る", room_path(@room_id), class: "btn btn-defaul btn-success" %>
-              </div>
-            <% else %>
-              <!-- Roomが存在しない場合には新規作成 -->
-              <%= form_with model: @room, url: rooms_path, local: true do |f| %>
-                <!-- Entryモデルへuser_idとroom_idを追加 -->
-                <%= fields_for @entry do |e| %>
-                  <%= e.hidden_field :user_id, value: @user.id %>
+            <li>
+              <% if @is_room == true %>
+                <!-- 既存Roomがある場合は該当patnへのリンク -->
+                <%= link_to room_path(@room_id), class: "btn btn-defaul btn-success" do %>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>メッセージを送る
                 <% end %>
-                <div class="bs_btn text-center">
-                  <%= f.submit "メッセージを送る", class: "btn btn-defaul btn-success" %>
-                </div>
+              <% else %>
+                <!-- Roomが存在しない場合には新規作成 -->
+                <%= form_with model: @room, url: rooms_path, local: true do |f| %>
+                  <!-- Entryモデルへuser_idとroom_idを追加 -->
+                  <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, value: @user.id %>
+                  <% end %>
+                  <%= button_tag type: "submit", class: "btn btn-default btn-success" do %>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>メッセージを送る
+                  <% end %>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
+            </li>
+            <li>
+              <% if current_user.following?(@user) %>
+                <%= link_to unfollow_path(@user.id), class: "btn btn-defaul btn-info",method: :POST do %>
+                  <i class="fa fa-heart" aria-hidden="true"></i>お気に入り解除
+                <% end %>
+              <% else %>
+                <%= link_to follow_path(@user.id), class: "btn btn-defaul btn-info btn-warning", method: :POST do %>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>お気に入り登録
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
+      </ul>
     </div>
   </div>
   <% if user_signed_in? && current_user.id == @user.id %>

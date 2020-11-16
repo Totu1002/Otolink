@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :users do
-    get "rooms/index"
-    get "rooms/show"
-  end
-
   devise_for :admins, controllers: {
     registrations: "admins/registrations",
     passwords: "admins/passwords",
@@ -18,7 +13,9 @@ Rails.application.routes.draw do
   }
 
   #sign_in,log_inせずともtop,about参照可能
-  get "/" => "users/homes#top",as: "home"
+  #root 'home#top'
+  root "users/homes#top"
+  #get "/" => "users/homes#top",as: "home"
   get "homes/about" => "users/homes#about",as: "about"
 
   #ゲストサインイン機能
@@ -27,7 +24,13 @@ Rails.application.routes.draw do
   end
 
   scope module: "users" do
-    resources :users, only:[:index, :show, :edit, :update]
+    resources :users, only:[:index, :show, :edit, :update] do
+      member do
+        get :following, :followers
+      end
+    end
+    post 'follow/:id' => 'relationships#create', as: 'follow'
+    post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
     #ユーザー論理退会アクション
     get "user/withdrawl" => "users#withdrawl"
     patch "user/withdrawl" => "users#hide"
@@ -36,6 +39,10 @@ Rails.application.routes.draw do
     #DM機能ルーティング
     resources :messages, only: [:create, :destroy]
     resources :rooms, only: [:create, :index, :show]
+    #DM通知機能ルーティング
+    resources :notifications, only: [:index]
+    #フォロー機能ルーティング
+    resources :follow_relationships, only: [:create, :destroy]
     #新規記事投稿ページルーティング
     get "user/recruit_member"=> "recruits#recruit_member"
     get "user/recruit_band"=> "recruits#recruit_band"

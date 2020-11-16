@@ -1,0 +1,11 @@
+<!-- Rev2.0にて実装するが本機能は現状使用しない -->
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+<div>
+ <%= link_to user_path(visitor) do %>
+     <%= visitor.name %>さんが
+ <% end %>
+ <% if notification.action=="dm" %>
+    あなたにメッセージを送りました
+ <% end %>
+</div>

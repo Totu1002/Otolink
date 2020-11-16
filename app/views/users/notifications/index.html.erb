@@ -1,0 +1,15 @@
+<!-- Rev2.0にて実装するが本機能は現状使用しない -->
+<div class="container">
+  <div class="row">
+    <div class="page_title">
+      <h2>通知一覧</h2>
+    </div>
+    <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+    <% if notifications.exists? %>
+        <%= render notifications %>
+        <%= paginate notifications %>
+    <% else %>
+        <p>通知はありません</p>
+    <% end %>
+  </div>
+</div>

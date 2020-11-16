@@ -99,6 +99,20 @@ class Users::UsersController < ApplicationController
     end
   end
 
+  #お気に入り機能
+  #自身がお気に入り登録中のユーザーを表示
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.following_user
+  end
+
+  #自身をお気に入り登録中のユーザーを表示
+  #現在未使用アクション
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.follower_user
+  end
+
   private
   def user_params
     params.require(:user).permit(:id,:name,:introduction,:gender,:age,:is_member,:email, :profile_image,:search ,:prefecture_ids => [],:part_ids => [],:genre_ids => [])
