@@ -59,6 +59,18 @@ class User < ApplicationRecord
   validates :part_ids, presence: true
   validates :genre_ids, presence: true
 
+  #検索機能用scope
+  scope :member, -> { where(is_member: "有効") }
+  scope :nickname, -> (nickname) { where(['name LIKE ?',"%#{nickname}%"]) }
+  scope :gender, -> (gender) { where(gender: gender) }
+  #活動エリア
+  scope :search_pref, -> (search_pref) { where(id: search_pref) }
+  #担当パート
+  scope :search_part, -> (search_part) { where(id: search_part) }
+  #ジャンル
+  scope :search_genre, -> (search_genre) { where(id: search_genre) }
+
+
   #ゲストサインイン機能アクション
   def self.guest
     user = User.find_or_initialize_by(email: "guest@guest.com") do |user|

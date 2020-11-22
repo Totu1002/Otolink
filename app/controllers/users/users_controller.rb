@@ -64,38 +64,38 @@ class Users::UsersController < ApplicationController
 
   def search
     #指定した条件により分岐しユーザーを絞り込む
-    #scopeを用いた方がよい可読性が向上する
+    #各モデルにてscopeを用いる
 
-    #ページ初期表示
-    @users = User.where(is_member: "有効").page(params[:page]).per(10)
+    #ページ初期表示、会員ステータス"有効"のみ取得
+    @users = User.member.page(params[:page]).per(10)
 
     if params[:name].present?
-      @users = User.where(['name LIKE ?', "%#{params[:name]}%"]).page(params[:page]).per(10)
+      @users = @users.nickname(params[:name]).page(params[:page]).per(10)
     end
 
     if params[:gender].present?
-      @users = @users.where(gender: params[:gender]).page(params[:page]).per(10)
+      @users = @users.gender(params[:gender]).page(params[:page]).per(10)
     end
 
     #指定した活動地域に紐付くユーザーを取得
     if params[:prefecture_ids].present?
-      users_pref = UsersPrefecture.where(prefecture_id: params[:prefecture_ids])
+      users_pref = UsersPrefecture.pref_id(params[:prefecture_ids])
       users_pref_id = users_pref.select("user_id")
-      @users = @users.where(id: users_pref_id).page(params[:page]).per(10)
+      @users = @users.search_pref(users_pref_id).page(params[:page]).per(10)
     end
 
     #指定したパートに紐付くユーザーを取得
     if params[:part_ids].present?
-      users_part = UsersPart.where(part_id: params[:part_ids])
+      users_part = UsersPart.part_id(params[:part_ids])
       users_part_id = users_part.select("user_id")
-      @users = @users.where(id: users_part_id).page(params[:page]).per(10)
+      @users = @users.search_part(users_part_id).page(params[:page]).per(10)
     end
 
     #指定したジャンルに紐付くユーザーを取得
     if params[:genre_ids].present?
-      users_genre = UsersGenre.where(genre_id: params[:genre_ids])
+      users_genre = UsersGenre.genre_id(params[:genre_ids])
       users_genre_id = users_genre.select("user_id")
-      @users = @users.where(id: users_genre_id).page(params[:page]).per(10)
+      @users = @users.search_genre(users_genre_id).page(params[:page]).per(10)
     end
   end
 
