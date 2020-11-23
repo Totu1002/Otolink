@@ -1,48 +1,107 @@
 <div class="container page-wrapper">
   <div class="row">
-    <div class="about_top">
-      <h1>ようこそ！Otolinkへ！</h1>
-    </div>
-    <div class="about_title">
-      <h3>Otolinkとは</h3>
-    </div class="about_body">
-      <p>
-        「ミュージシャンとバンドを繋ぐサービス」です。<br>
-        「メンバー募集」あるいは「バンド募集」の記事を投稿しましょう。<br>
-        <br>
-        検索フォームから希望の条件で記事の検索ができるので、<br>
-        あなたにぴったりのメンバー・バンドを見つけましょう!<br>
-        <br>
-        お気に入りの記事を見つけたら、DM(ダイレクトメッセージ)を使って,<br>
-        記事を投稿したユーザーとコンタクトを取ってみましょう！<br>
-      </p>
-    </div>
-    <div class="about_title">
-      <h4>「開発者からOtolinkについて」</h4>
-    </div>
-    <div class="about_body">
-      <p>
-        --- 最新リリース ---<br>
-        ■ Otolink Rev.1.0 について<br>
-        2020/10/25 リリース<br>
-        "基本機能"<br>
-        ・ユーザ管理機能(管理者機能)<br>
-        ・記事投稿機能<br>
-        ・検索機能<br>
-        ・DM機能<br>
-      </p>
-      <p>
-        --- 今後のリリース予定 ---<br>
-        ■ Otolink Rev 2.0 について<br>
-        "追加予定機能"<br>
-        ・ユーザーのお気に入り機能<br>
-        ・DM機能の着信通知機能<br>
-        ・デモ音源及び動画配信サイトのリンク付け機能<br>
-        ・イベント企画者やライブハウス運営者などの音楽業界関係者ロール作成<br>
-        ・音楽業界関係者による記事投稿機能<br>
-        ・ライブハウス、リハーサル/レコーディングスタジオ情報の投稿機能<br>
-        ・音楽関係者ロールの記事に対してユーザーからのコメント機能
-      </p>
+    <div class="about col-xs-12">
+      <div class="about-top col-xs-12">
+        <h1>Otolinkとは?</h1>
+        <p>「ミュージシャンを繋ぐサービス」です。</p>
+        <p>
+          <strong>"バンドをやりたいけど周りに仲間がいない！"</strong><br>
+          <strong>"新たなバンドメンバーを探している！"</strong><br>
+          そんなバンドマン達の悩みを解消するサービスです。
+        </p>
+      </div>
+      <div class="row">
+        <div class="about-section col-xs-12">
+          <div class="about-img col-xs-6 col-md-5">
+            <%= image_tag "about_img_1.jpg", class: "image-trim" %>
+          </div>
+          <div class="about-innner col-xs-6 col-md-7">
+            <h2>
+              <i class="fa fa-id-card"></i>ユーザーになる
+            </h2>
+            <p class="about-text">
+              ユーザー登録をしなくても<strong>記事の閲覧</strong>や<strong>検索機能</strong>が使用できます!<br>
+              登録することで<strong>募集記事の投稿</strong>や<strong>メッセージ機能</strong>、<br>
+              <strong>ユーザーお気に入り機能</strong>を使うことができます。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="about-section col-xs-12">
+          <div class="about-innner col-xs-6 col-md-7">
+            <h2>
+              <i class="fa fa-paste"></i>募集記事を投稿する
+            </h2>
+            <p class="about-text">
+              あなたの<strong>マイページ</strong>から記事の投稿ができます!<br>
+              <strong>「メンバー募集」</strong>と<strong>「バンド募集」</strong>の二種類の記事から<br>それぞれ一つずつ投稿することができます。<br>
+            </p>
+          </div>
+          <div class="about-img col-xs-6 col-md-5">
+            <%= image_tag "about_img_2.jpg", class: "image-trim" %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="about-section col-xs-12">
+          <div class="about-img col-xs-6 col-md-5">
+            <%= image_tag "about_img_3.jpg", class: "image-trim" %>
+          </div>
+          <div class="about-innner col-xs-6 col-md-7">
+            <h2>
+              <i class="fa fa-search" aria-hidden="true"></i>ユーザーや記事を検索する
+            </h2>
+            <p class="about-text">
+              検索フォームから希望の条件で<strong>ユーザー・記事の検索</strong>ができます!<br>
+              あなたにぴったりのメンバー・バンドを見つけましょう。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="about-section col-xs-12">
+          <div class="about-innner col-xs-6 col-md-7">
+            <h2>
+              <i class="fa fa-comments"></i>メッセージを送る
+            </h2>
+            <p class="about-text">
+              気になる記事やユーザーを見つけたら、<br>
+              <strong>DM(ダイレクトメッセージ)機能</strong>を使って<br>
+              コンタクトを取ってみましょう！<br>
+            </p>
+          </div>
+          <div class="about-img col-xs-6 col-md-5">
+            <%= image_tag "about_img_4.jpg", class: "image-trim" %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="about-bottom col-xs-12">
+          <p>
+            <strong>--- リリースノート ---</strong><br>
+            <strong>Otolink</strong>はまだまだ発展途上のサービスです。<br>
+            製作者の実力不足で実装ができていない機能が多数あります。<br>
+            今後も学習を進め随時、機能追加を実施してまいります。<br>
+            引き続き、暖かく見守って頂けますと幸いです。<br>
+          </p>
+          <p>
+            ■2020/10/28 Rev1.0 リリース<br>
+            ■2020/11/24 Rev1.1 リリース<br>
+            ・一部レイアウト修正<br>
+            ・ユーザーお気に入り機能、DM通知表示機能　追加<br>
+            <br>
+            --- 今後のリリース予定 ---<br>
+            ■ Otolink Rev 2.0<br>
+            "追加予定機能"<br>
+            ・デモ音源投稿機能及び動画配信サイトのリンク付け機能<br>
+            ・イベント企画者やライブハウス運営者などの音楽業界関係者ロール作成<br>
+            ・音楽業界関係者による記事投稿機能<br>
+            ・ライブハウス、リハーサル/レコーディングスタジオ情報の投稿機能<br>
+            ・音楽関係者ロールの記事に対してユーザーからのコメント機能<br>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -209,6 +209,42 @@ ul {
   position: absolute;
 }
 
+/* aboutページ */
+.about-img {}
+
+.image-trim {
+  max-width: 100%;
+  padding: 20px;
+}
+
+.about-top {
+  text-align: center;
+  line-height: 2;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.about-section {
+  padding-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.about-innner {
+  text-align: center;
+  line-height: 2;
+}
+
+.about-innner h2 {
+  padding-bottom: 10px;
+}
+
+.about-bottom {
+  padding-top: 50px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
 /* ヘッダーのメディアクエリ指定 */
 /* 1058→991 */
 @media (max-width: 991px) {
