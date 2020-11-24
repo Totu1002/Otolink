@@ -1,4 +1,4 @@
-<div class="container body-wrapper">
+<div class="container page-wrapper">
   <div class="row">
     <div class="page_title">
       <div class="page_title">
@@ -62,11 +62,11 @@
       <table class="table">
         <tbody>
           <tr>
-            <td>
+            <td class="col-xs-3">
               <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>
-            <td>
+            <td class="col-xs-3">
               <h4><%= link_to recruit.title, recruit_path(recruit),class: "top__link" %></h4>
               <p>活動方向性：<%= recruit.stance %></p>
             </td>

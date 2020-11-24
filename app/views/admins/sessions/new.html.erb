@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container login-wrapper">
   <div class="row">
-    <div class="form-wrapper">
-      <h2>管理者ログイン</h2>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="page_title">
+        <h2>管理者ログイン</h2>
+      </div>
       <h4>ポートフォリオ用：管理者情報</h4>
       <p>
         <strong>name  : </strong>admin<br>
@@ -22,14 +24,11 @@
               <%= f.password_field :password, autocomplete: "current-password" %>
             </div>
           </div>
-          <div class="button-panel">
-            <%= f.submit "ログイン", class: "btn btn-primary" %>
+          <div class="button-panel" style="width: 60%; padding-bottom: 3%;">
+            <%= f.submit "ログイン", class: "btn btn-bloc btn-primary" %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-
-

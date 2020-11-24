@@ -1,7 +1,7 @@
-# 音Link
+# OtoLink
 
 ## サイト概要
-ミュージシャン同士をつなぐサービス
+「ミュージシャンを繋ぐサービス」
 
 ### サイトテーマ
 バンドやメンバー募集のために活用されるアプリケーション
@@ -21,7 +21,15 @@
 ## 設計書
 
 ### 機能一覧
-<https://docs.google.com/spreadsheets/d/14tbBy90lMiEwmucEItoYwWmHjDtknh7jig6nHLB_ZbE/edit?usp=sharing>
+<https://docs.google.com/spreadsheets/d/17B93klCvdpZ-Z1fbMA8yYy3oEqFKl0ZSqQPdWoI4CWU/edit?usp=sharing>
+### テーブル定義書
+<https://drive.google.com/file/d/1wC4E10oHYtQrMaUKi9xx_inUH5GnqyWH/view?usp=sharing>
+### ER図
+<https://drive.google.com/file/d/15VtxTLeIH4pAvb2B9DMSi3pXRAv-OxmD/view?usp=sharing>
+### 詳細設計書
+<https://drive.google.com/file/d/1jvkVzpYLNH3jlD4wC3cTKuK4hefB8E1z/view?usp=sharing>
+### ワイヤーフレーム
+<https://drive.google.com/file/d/113_EAibANoLWidY5WOTWIcv4pxkair26/view?usp=sharing>
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -29,7 +37,4 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - 仮想環境：Vagrant,VirtualBox
-
-## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- デプロイ環境：AWS(VPC,EC2,RDS,S3)

@@ -73,41 +73,42 @@ class Users::RecruitsController < ApplicationController
 
   def search
     #指定した条件により分岐し記事を絞り込む
-    #scopeを用いた方がよい可読性が向上する
+    #各モデルにてscopeを用いる
 
     #ページ初期表示
-    user = User.where(is_member: "有効")
-    @recruits =  Recruit.where(is_status: "公開中",user_id: user.ids).page(params[:page]).per(10)
+    user = User.member
+    @recruits =  Recruit.status(user.ids).page(params[:page]).per(10)
 
     #指定した記事種別に紐付いた記事を取得
     if params[:article_type].present?
-      @recruits = @recruits.where(article_type: params[:article_type]).page(params[:page]).per(10)
+      @recruits = @recruits.article_type(params[:article_type]).page(params[:page]).per(10)
     end
 
     #指定した活動方針に紐付いた記事を取得
     if params[:stance].present?
-      @recruits = @recruits.where(stance: params[:stance]).page(params[:page]).per(10)
+      @recruits = @recruits.stance(params[:stance]).page(params[:page]).per(10)
     end
 
     #指定した活動地域に紐付く記事を取得
     if params[:prefecture_ids].present?
-      recruits_pref = RecruitsPrefecture.where(prefecture_id: params[:prefecture_ids])
+      #recruits_pref = RecruitsPrefecture.where(prefecture_id: params[:prefecture_ids])
+      recruits_pref = RecruitsPrefecture.pref_id(params[:prefecture_ids])
       recruits_pref_id = recruits_pref.select("recruit_id")
-      @recruits = @recruits.where(id: recruits_pref_id).page(params[:page]).per(10)
+      @recruits = @recruits.search_pref(recruits_pref_id).page(params[:page]).per(10)
     end
 
     #指定したパートに紐付く記事を取得
     if params[:part_ids].present?
-      recruits_part = RecruitsPart.where(part_id: params[:part_ids])
+      recruits_part = RecruitsPart.part_id(params[:part_ids])
       recruits_part_id = recruits_part.select("recruit_id")
-      @recruits = @recruits.where(id: recruits_part_id).page(params[:page]).per(10)
+      @recruits = @recruits.search_part(recruits_part_id).page(params[:page]).per(10)
     end
 
     #指定したジャンルに紐付く記事を取得
     if params[:genre_ids].present?
-      recruits_genre = RecruitsGenre.where(genre_id: params[:genre_ids])
+      recruits_genre = RecruitsGenre.genre_id(params[:genre_ids])
       recruits_genre_id = recruits_genre.select("recruit_id")
-      @recruits = @recruits.where(id: recruits_genre_id).page(params[:page]).per(10)
+      @recruits = @recruits.search_genre(recruits_genre_id).page(params[:page]).per(10)
     end
   end
 
