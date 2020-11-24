@@ -1,4 +1,5 @@
-<div class="container body-wrapper">
+
+<div class="container page-wrapper">
   <div class="row">
     <div class="page_title">
       <h2>メンバー検索フォーム</h2>
@@ -62,7 +63,7 @@
       <table class="table">
         <tbody>
           <tr>
-            <td>
+            <td class="col-xs-3">
               <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
               <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
             </td>

@@ -7,83 +7,104 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <header>
-    <div class="">
-      <div class="">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <%= link_to "Otolink", home_path, class: "navbar-brand" %>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-              <li class=""><%= link_to home_path do %>
-                <i class="fa fa-home" aria-hidden="true"></i>ホーム
-              <% end %>
+  <body>
+    <header>
+      <nav class="navbar navbar-inverse navbar-expand-md navbar-fixed-top"><!-- navbar-light -->
+        <div class="container">
+          <div class="">
+            <%= link_to "Otolink", root_path, class: "navbar-brand" %>
+          </div>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsiveMenu" aria-controls="responsiveMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="responsiveMenu">
+            <ul class="nav navbar-nav navbar-right mr-auto">
+              <li class="nav-item">
+                <%= link_to root_path do %>
+                  <i class="fa fa-home" aria-hidden="true"></i>ホーム
+                <% end %>
               </li>
               <% if user_signed_in? %>
-                <li>
+                <!-- ログイン時ヘッダー -->
+                <li class="nav-item">
                   <%= link_to about_path do %>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to recruit_search_path do %>
                     <i class="fa fa-search" aria-hidden="true"></i>記事を探す
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to user_search_path do %>
                     <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
+                  <%= link_to rooms_path do %>
+                    <% if unchecked_notifications.any? %>
+                      <span class="fa-stack n-stack">
+                        <i class="fa fa-envelope fa-stack-2x n-envelope"></i>
+                        <i class="fa fa-circle fa-stack-1x n-circle"></i>
+                      </span>メッセージ
+                    <% else %>
+                      <i class="fa fa-envelope" aria-hidden="true"></i>メッセージ
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="nav-item">
                   <%= link_to user_path(current_user.id) do %>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>マイページ
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to destroy_admin_session_path, method: :delete do %>
                     <i class="fa fa-sign-out" aria-hidden="true"></i>ログアウト
                   <% end %>
                 </li>
               <% elsif admin_signed_in? %>
-                <li>
+                <!-- 管理者用ヘッダー -->
+                <li class="nav-item">
                   <%= link_to admins_users_path do %>
                     <i class="fa fa-users" aria-hidden="true"></i>ユーザー一覧
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to admins_recruits_path do %>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>投稿記事一覧
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to destroy_admin_session_path, method: :delete do %>
                     <i class="fa fa-sign-out" aria-hidden="true"></i>ログアウト
                   <% end %>
                 </li>
               <% else %>
-                <li>
+                <!-- 非ログイン時ヘッダー -->
+                <li class="nav-item">
                   <%= link_to about_path do %>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>Otolinkとは
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to recruit_search_path do %>
                     <i class="fa fa-search" aria-hidden="true"></i>記事を探す
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to user_search_path do %>
                     <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
                   <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to new_user_registration_path do %>
                     <i class="fa fa-user-plus" aria-hidden="true"></i>新規登録
                     <% end %>
                 </li>
-                <li>
+                <li class="nav-item">
                   <%= link_to new_user_session_path do %>
                     <i class="fa fa-sign-in" aria-hidden="true"></i>ログイン
                   <% end %>
@@ -92,19 +113,15 @@
             </ul>
           </div>
         </div>
-      </div>
-    </nav>
-  </header>
-  <body>
-    <div id="wrapper">
+      </nav>
+    </header>
+    <main>
       <%= yield %>
-    </div>
-  </body>
-  <footer class="footer">
-    <div class="container">
-      <div class="">
-        <p class="text-muted">Portfolio App Otolink.</p>
+    </main>
+    <footer>
+      <div class="container">
+        <p>Portfolio App Otolink.</p>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </body>
 </html>
