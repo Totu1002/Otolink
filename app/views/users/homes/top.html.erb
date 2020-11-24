@@ -50,7 +50,7 @@
         <tbody>
           <tr>
             <td class="col-xs-3">
-              <%= attachment_image_tag(user, :profile_image, :fill, 60, 60,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+              <%= attachment_image_tag(user, :profile_image, size: "60x60", style: "border-radius: 50%;", fallback: "no_image.jpg") %>
             </td>
             <td class="col-xs-3">
               <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
