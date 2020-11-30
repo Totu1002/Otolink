@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     get "user/search" => "users#search"
   end
 
+  #管理者側はURLにadminsを含む
   namespace :admins do
     get "/" => "admins/homes#top",as: 'home'
     get "homes/about" => "admins/homes#about",as: "about"
