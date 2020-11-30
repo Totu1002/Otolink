@@ -66,18 +66,22 @@
       </table>
       <ul class="list-inline center-block text-center">
         <% if user_signed_in? && current_user.id == @user.id %>
-          <li>
-            <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
-          </li>
+          <% unless @user.email == "guest@guest.com" %>
+            <li>
+              <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-default btn-success" %>
+            </li>
+          <% end %>
           <li>
             <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-defaul btn-success" %>
           </li>
           <li>
             <%= link_to "お気に入りユーザー一覧", following_user_path(@user.id), class: "btn btn-defaul btn-success" %>
           </li>
-          <li>
-            <%= link_to "Otolinkから退会する", user_withdrawl_path, class: 'btn btn-danger' %>
-          </li>
+          <% unless @user.email == "guest@guest.com" %>
+            <li>
+              <%= link_to "Otolinkから退会する", user_withdrawl_path, class: 'btn btn-danger' %>
+            </li>
+          <% end %>
         <% else %>
           <% if user_signed_in? && @user.is_member == "有効" %>
             <!-- DM機能 -->

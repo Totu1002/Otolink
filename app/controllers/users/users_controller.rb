@@ -36,6 +36,9 @@ class Users::UsersController < ApplicationController
 
   def edit
     @user = current_user
+    if @user.email = "guest@guest.com"
+      redirect_to user_path, notice: "ゲストユーザーの編集はできません"
+    end
   end
 
   def update
@@ -51,6 +54,9 @@ class Users::UsersController < ApplicationController
   #ユーザー退会確認画面用アクション
   def withdrawal
     @user = current_user
+    if @user.email = "guest@guest.com"
+      redirect_to user_path, notice: "ゲストユーザーの退会はできません"
+    end
   end
 
   #ユーザー論理退会用アクション
