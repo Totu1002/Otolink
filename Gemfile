@@ -77,8 +77,9 @@ gem 'active_hash'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'font-awesome-rails'
-
 gem 'dotenv-rails'
+gem 'refile-s3'
+
 group :production do
   gem 'mysql2'
 end
