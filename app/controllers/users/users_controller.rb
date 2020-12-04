@@ -36,7 +36,7 @@ class Users::UsersController < ApplicationController
 
   def edit
     @user = current_user
-    if @user.email = "guest@guest.com"
+    if @user.email == "guest@guest.com"
       redirect_to user_path, notice: "ゲストユーザーの編集はできません"
     end
   end
