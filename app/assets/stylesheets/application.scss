@@ -58,6 +58,7 @@ body {
 .page-wrapper {
   width: 95%;
   height: 100%;
+  min-height: 800px;
   background: #ffffff;
   margin: auto;
   /*position: relative;*/
@@ -101,26 +102,9 @@ footer p {
 }
 
 /* topページ画像 */
-ul {
-  list-style: none;
-}
-
-.top {
-
-}
-
-.top__btn ul {
-
-}
-
-.top__btn li {
-  width: 40%;
-}
-
-/* topページ画像 */
 .top__img {
-  padding: 2%;
   width: 100%;
+  margin: 10px auto 20px auto;
 }
 
 /* topページ内リンク */
@@ -133,12 +117,103 @@ ul {
   background-color: #333333;
   color:#ffffff;
   text-align: center;
-  margin: 2%;
 }
 
-/* bootstrap ボタン余白 */
+/* プロフィール画像中央表示 */
+.text-center {
+  text-align: center;
+  margin: auto;
+  padding: 2%;
+}
+
+/* プロフィール編集プロパティ */
+/* 画像プレビュー */
+#img_prev {
+  border-radius: 50%;
+  width:200px;
+  height:200px;
+}
+
+/* デフォルトボタン非表示 */
+.item_image_btn{
+  display: none;
+}
+
+/* インプットボタンプロパティ */
+/* bootstrap採用のためコメントアウト */
+/*#img_field {
+font-size: 25px;
+font-style: inherit;
+margin: 0 auto;
+color: white;
+background-color: #5bc0de;
+border-radius: 5px;
+width: 300px;
+height: 40px;
+text-align: center;
+line-height: 40px;
+}*/
+
+/* bootstrap ボタンプロパティ */
 .bs_btn {
   margin-bottom: 20px;
+}
+
+.bs_btn_wide {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* タブ表示プロパティ */
+.tab-wrap{
+  /*width: 90%;*/
+  /*max-width: 800px;*/
+  margin: 20px 0;
+}
+
+.clearfix:after{
+  content:"";
+  clear: both;
+  display: block;
+}
+
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 50%;
+}
+#tab-menu p {
+  font-weight: bolder;
+  border-bottom: solid 1px;
+  font-size: 120%;
+}
+
+#tab-menu a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background: #333333;
+  border: 1px solid #333333;
+  border-bottom: none;
+}
+
+#tab-menu .active {
+  background: #fff;
+  color: #000000;
+}
+
+#tab-contents .tab {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #333333;
+  border-top: none;
+}
+
+#tab-contents p{
+  color:#000000;
+  line-height: 2.5;
 }
 
 /* ユーザーログイン画面 */
@@ -210,7 +285,7 @@ ul {
 }
 
 /* aboutページ */
-.about-img {}
+/*.about-img {}*/
 
 .image-trim {
   max-width: 100%;
@@ -245,9 +320,42 @@ ul {
   text-align: center;
 }
 
+/* 検索ページ */
+/* user search 名前検索欄 */
+.name_field {
+  margin: 10px;
+  width: 60%;
+  text-align: center;
+  line-height:30px;
+}
+
+/* 検索ページ アコーディオンプロパティ */
+#acMenu dt {
+  display:block;
+  /*width:200px;*/
+  width:100%;
+  height:50px;
+  background:#333333;
+  color: #ffffff;
+  line-height:50px;
+  text-align:center;
+  border:#666 1px solid;
+  cursor:pointer;
+  margin: 10px auto 0 auto;
+}
+
+#acMenu dd {  
+  width: 100%;
+  height: 100%;
+  line-height:50px;
+  text-align:center;
+  border:#666 1px solid;
+  display:none;
+}
+
 /* ヘッダーのメディアクエリ指定 */
-/* 1058→991 */
-@media (max-width: 991px) {
+/* 1058→767 */
+@media (max-width: 767px) {
   .navbar-header {
       float: none;
   }
@@ -278,6 +386,7 @@ ul {
   .navbar-nav>li>a {
       padding-top: 10px;
       padding-bottom: 10px;
+
   }
   .collapse.in{
       display:block !important;

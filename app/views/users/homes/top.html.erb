@@ -1,68 +1,82 @@
 <div class="container page-wrapper">
+  <!-- トップイメージ -->
   <div class="row">
     <p class="alert-success"><%= notice %></p>
     <p class="alert-danger"><%= alert %></p>
     <div class="top text-center">
-      <div class="top__img">
-        <%= image_tag "top_logo_3.svg",class: "top__img" %><!-- 3.svg 2.png -->
+      <div class="col-xs-12">
+        <%= image_tag "top_logo_3.svg",class: "top__img" %>
       </div>
-      <ul class="top__btn list-inline center-block">
-        <li>
-          <%= link_to recruit_search_path, class: "btn btn-lg btn-block btn-warning" do %>
-            <i class="fa fa-search" aria-hidden="true"></i>記事を探す
-          <% end %>
-        </li>
-        <li>
-          <%= link_to user_search_path, class: "btn btn-lg btn-block btn-warning" do %>
-            <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
-          <% end %>
-        </li>
+    </div>
+  </div>
+  <!-- トップ検索リンクボタン -->
+  <div class="row">
+    <div class="">
+      <div class="col-xs-6">
+        <%= link_to recruit_search_path, class: "btn btn-lg btn-block btn-warning" do %>
+          <i class="fa fa-search" aria-hidden="true"></i>記事を探す
+        <% end %>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to user_search_path, class: "btn btn-lg btn-block btn-warning" do %>
+          <i class="fa fa-users" aria-hidden="true"></i>メンバーを探す
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- tabページ -->
+  <div class="row">
+    <div class="tab-wrap col-xs-12">
+      <ul id="tab-menu" class="clearfix">
+        <li><a href="#tab1" class="active"><p>最新メンバー募集記事</p></a></li>
+        <li><a href="#tab2" class=""><p>最新バンド募集記事</p></a></li>
       </ul>
+      <div id="tab-contents" class="clearfix">
+        <div id="tab1" class="tab">
+          <% @recruit_members.each do |recruit_member| %>
+            <% user = User.find(recruit_member.user_id) %>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="col-xs-3">
+                    <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+                  </td>
+                  <td class="col-xs-3">
+                    <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+                  </td>
+                  <td class="col-xs-6">
+                    <h4><%= link_to recruit_member.title, recruit_path(recruit_member),class: "top__link" %></h4>
+                    <p>活動方向性：<%= recruit_member.stance %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+          <%= paginate @recruit_members %>
+        </div>
+        <div id="tab2" class="tab">
+          <% @recruit_bands.each do |recruit_band| %>
+            <% user = User.find(recruit_band.user_id) %>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="col-xs-3">
+                    <%= attachment_image_tag(user, :profile_image, size: "60x60", style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+                  </td>
+                  <td class="col-xs-3">
+                    <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
+                  </td>
+                  <td class="col-xs-6">
+                    <h4><%= link_to recruit_band.title, recruit_path(recruit_band),class: "top__link" %></h4>
+                    <p>活動方向性：<%= recruit_band.stance %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+          <%= paginate @recruit_bands %>
+        </div>
+      </div>
     </div>
-    <div class="page_title">
-      <h3>最新のメンバー募集記事</h3>
-    </div>
-    <% @recruit_members.each do |recruit_member| %>
-      <% user = User.find(recruit_member.user_id) %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td class="col-xs-3">
-              <%= attachment_image_tag(user, :profile_image, size: "60x60",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-            </td>
-            <td class="col-xs-3">
-              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
-            </td>
-            <td class="col-xs-6">
-              <h4><%= link_to recruit_member.title, recruit_path(recruit_member),class: "top__link" %></h4>
-              <p>活動方向性：<%= recruit_member.stance %></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
-    <div class="page_title">
-      <h3>最新のバンド募集記事</h3>
-    </div>
-    <% @recruit_bands.each do |recruit_band| %>
-      <% user = User.find(recruit_band.user_id) %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td class="col-xs-3">
-              <%= attachment_image_tag(user, :profile_image, size: "60x60", style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-            </td>
-            <td class="col-xs-3">
-              <p><%= link_to user.name, user_path(user.id),class: "top__link" %>(<%= user.age %>歳 | <%= user.gender %>)</p>
-            </td>
-            <td class="col-xs-6">
-              <h4><%= link_to recruit_band.title, recruit_path(recruit_band),class: "top__link" %></h4>
-              <p>活動方向性：<%= recruit_band.stance %></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
-    <%= paginate @recruit_bands %>
   </div>
 </div>

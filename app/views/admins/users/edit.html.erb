@@ -1,21 +1,29 @@
 <div class="container page-wrapper">
   <div class="row">
-    <div class="page_title">
-      <h2>プロフィール編集ページ</h2>
+    <div class="col-xs-12">
+      <div class="page_title">
+        <h2>プロフィール編集ページ</h2>
+      </div>
+      <p class="alert-success"><%= notice %></p>
+      <p class="alert-danger"><%= alert %></p>
     </div>
-    <p class="alert-success"><%= notice %></p>
-    <p class="alert-danger"><%= alert %></p>
     <%= form_with model: @user, url: admins_user_path(@user.id),local: true do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
+    <div class="col-xs-6 col-xs-offset-3" style="text-align: center;">
+      <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 justify-content-center" style="text-align: center;">
+      <%= f.label :profile_image, "プロフィール画像" %>
+    </div>
+    <div class="item_image_btn">
+      <%= f.attachment_field :profile_image %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3" id="img_field" onClick="$('#file').click()" >
+      <p class="btn btn-default btn-success bs_btn_wide">画像選択</p>
+    </div>
+    <div class="col-xs-12">
       <table class="table">
         <tbody>
-          <tr>
-            <td>
-              <%= attachment_image_tag(@user, :profile_image, :fill, 200, 200,style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-              <%= f.label :profile_image, "プロフィール画像" %>
-              <%= f.attachment_field :profile_image %>
-            </td>
-          </tr>
           <tr>
             <td>
               <div class="field">
@@ -92,9 +100,10 @@
           </tr>
         </tbody>
       </table>
-      <div class="actions">
-        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success bs_btn" %>
+      <div class="actions col-xs-6 col-xs-offset-3">
+        <%= f.submit "プロフィール更新", class: "btn btn-default btn-success bs_btn_wide", style: "margin-bottom: 30px;" %>
       </div>
+    </div>
     <% end %>
   </div>
 </div>

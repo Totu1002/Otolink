@@ -1,61 +1,43 @@
 <div class="container page-wrapper">
   <div class="row">
-    <div class="page_title">
-      <h2>投稿記事詳細ページ</h2>
-    </div>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>
-            <p><strong>記事の種類</strong></p>
-            <%= @recruit.article_type %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p><strong>タイトル</strong></p>
-            <%= @recruit.title %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p><strong>記事の内容</strong></p>
-            <%= @recruit.body %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p><strong>活動の方向性</strong></p>
-            <%= @recruit.stance %>
-          </td>
-        </tr>
-        <!-- 記事種別"メンバー募集"時view表示 -->
-        <% if @recruit.article_type == "メンバー募集"%>
-        <tr>
-          <td>
-            <p><strong>募集性別</strong></p>
-            <%= @recruit.gender %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p><strong>活動地域</strong></p>
-            <% @recruit.prefectures.each do |prefecture| %>
-              <%= prefecture.name %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p><strong>募集パート</strong></p>
-            <% @recruit.parts.each do |part| %>
-              <%= part.name %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-        <!-- 記事種別"バンド募集"時view表示 -->
-        <% if @recruit.article_type == "バンド募集"%>
+    <div class="col-xs-12">
+      <div class="page_title">
+        <h2>投稿記事詳細ページ</h2>
+      </div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <p><strong>記事の種類</strong></p>
+              <%= @recruit.article_type %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>タイトル</strong></p>
+              <%= @recruit.title %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>記事の内容</strong></p>
+              <%= @recruit.body %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>活動の方向性</strong></p>
+              <%= @recruit.stance %>
+            </td>
+          </tr>
+          <!-- 記事種別"メンバー募集"時view表示 -->
+          <% if @recruit.article_type == "メンバー募集"%>
+          <tr>
+            <td>
+              <p><strong>募集性別</strong></p>
+              <%= @recruit.gender %>
+            </td>
+          </tr>
           <tr>
             <td>
               <p><strong>活動地域</strong></p>
@@ -64,35 +46,57 @@
               <% end %>
             </td>
           </tr>
-          <td>
-            <p><strong>加入パート</strong></p>
-            <% @recruit.parts.each do |part| %>
-              <%= part.name %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-        <tr>
-          <td>
-            <p><strong>募集するジャンル</strong></p>
-            <% @recruit.genres.each do |genre| %>
-              <%= genre.name %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-    <% if user_signed_in? && current_user.id == @recruit.user_id %>
-      <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: "btn btn-default btn-success" %>
-    <% end %>
-    <div class="">
+          <tr>
+            <td>
+              <p><strong>募集パート</strong></p>
+              <% @recruit.parts.each do |part| %>
+                <%= part.name %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <!-- 記事種別"バンド募集"時view表示 -->
+          <% if @recruit.article_type == "バンド募集"%>
+            <tr>
+              <td>
+                <p><strong>活動地域</strong></p>
+                <% @recruit.prefectures.each do |prefecture| %>
+                  <%= prefecture.name %>
+                <% end %>
+              </td>
+            </tr>
+            <td>
+              <p><strong>加入パート</strong></p>
+              <% @recruit.parts.each do |part| %>
+                <%= part.name %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>
+              <p><strong>募集するジャンル</strong></p>
+              <% @recruit.genres.each do |genre| %>
+                <%= genre.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3">
+      <% if user_signed_in? && current_user.id == @recruit.user_id %>
+        <%= link_to "記事を編集する", edit_recruit_path(@recruit), class: "btn btn-default btn-success" %>
+      <% end %>
+    </div>
+    <div class="col-xs-12">
       <div class="page_title">
         <h3>投稿者プロフィール</h3>
       </div>
-      <table class="table">
+      <table class="table text-center">
         <tbody>
           <tr>
             <td>
@@ -100,10 +104,22 @@
             </td>
           </tr>
           <tr>
-            <td><%= @user.name %></td>
+            <td>
+              <p><strong>ユーザーネーム</strong></p>
+              <%= @user.name %>
+            </td>
           </tr>
           <tr>
-            <td><%= @user.gender %><%= @user.age %></td>
+            <td>
+              <p><strong>性別</strong></p>
+              <%= @user.gender %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>年齢</strong></p>
+              <%= @user.age %>
+            </td>
           </tr>
           <tr>
             <td>
@@ -123,7 +139,9 @@
           </tr>
         </tbody>
       </table>
-      <%= link_to 'プロフィール詳細', admins_user_path(@user.id), class: "btn btn-default btn-success bs_btn" %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3">
+      <%= link_to 'プロフィール詳細', admins_user_path(@user.id), class: "btn btn-default btn-success bs_btn_wide" %>
     </div>
   </div>
 </div>

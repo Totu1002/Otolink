@@ -1,63 +1,61 @@
 <div class="container page-wrapper">
   <div class="row">
-    <div class="page_title">
-      <h2>ユーザー詳細ページ</h2>
-    </div>
-    <p class="alert-success"><%= notice %></p>
-    <p class="alert-danger"><%= alert %></p>
-    <div class="">
-      <table class="table text-center">
-        <tbody>
-          <tr>
-            <tb>
-              <div class="text-center" style="padding: 2%;">
-                <%= attachment_image_tag(@user, :profile_image, size: "200x200",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
-              </div>
-            </tb>
-          </tr>
-          <tr>
-            <td><p><strong>ユーザー名</strong></p></td>
-            <td><%= @user.name %></td>
-          </tr>
-          <tr>
-            <td><p><strong>性別</strong></p></td>
-            <td><%= @user.gender %></td>
-          </tr>
-          <tr>
-            <td><p><strong>年齢</strong></p></td>
-            <td><%= @user.age %></td>
-          </tr>
-          <tr>
-            <td><p><strong>活動エリア</strong></p></td>
-            <td>
-              <% @user.prefectures.each do |pref| %>
-                <%= pref.name %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td><p><strong>担当パート</strong></p></td>
-            <td>
-              <% @user.parts.each do |part| %>
-                <%= part.name %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td><p><strong>好みのジャンル</strong></p></td>
-            <td>
-              <% @user.genres.each do |genre| %>
-                <%= genre.name %>
-              <% end %>
-            </td>
-          </tr>
-          </tr>
-          <tr>
-            <td><p><strong>自己紹介文<strong></p></td>
-            <td><%= @user.introduction %></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-xs-12">
+      <div class="page_title">
+        <h2>ユーザー詳細ページ</h2>
+      </div>
+      <p class="alert-success"><%= notice %></p>
+      <p class="alert-danger"><%= alert %></p>
+      <div class="">
+        <table class="table text-center">
+          <div class="text-center" style="padding: 2%;">
+            <%= attachment_image_tag(@user, :profile_image, size: "200x200",style: "border-radius: 50%;", fallback: "no_image.jpg") %>
+          </div>
+          <tbody>
+            <tr>
+              <td><strong>ユーザー名</strong></td>
+              <td><%= @user.name %></td>
+            </tr>
+            <tr>
+              <td><strong>性別</strong></td>
+              <td><%= @user.gender %></td>
+            </tr>
+            <tr>
+              <td><strong>年齢</strong></td>
+              <td><%= @user.age %></td>
+            </tr>
+            <tr>
+              <td><strong>活動エリア</strong></td>
+              <td>
+                <% @user.prefectures.each do |pref| %>
+                  <%= pref.name %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>担当パート</strong></td>
+              <td>
+                <% @user.parts.each do |part| %>
+                  <%= part.name %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>好みのジャンル</strong></td>
+              <td>
+                <% @user.genres.each do |genre| %>
+                  <%= genre.name %>
+                <% end %>
+              </td>
+            </tr>
+            </tr>
+            <tr>
+              <td><strong>自己紹介文<strong></td>
+              <td><%= @user.introduction %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
