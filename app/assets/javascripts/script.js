@@ -11,6 +11,7 @@ $(document).ready(function() {
     });
 });
 
+//画像プレビュー表示
 $(document).ready(function(){
     function readURL(input) {
       if(input.files && input.files[0]){
@@ -25,3 +26,10 @@ $(document).ready(function(){
       readURL(this);
     });
   });
+
+//アコーディオン表示
+$(document).ready(function(){
+  $("#acMenu dt").on("click", function() {
+    $(this).next().slideToggle();
+  });
+});
