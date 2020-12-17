@@ -11,7 +11,7 @@ class Admins::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user.email = "guest@guest.com"
+    if @user.email == "guest@guest.com"
       redirect_to user_path, notice: "ゲストユーザーの編集はできません"
     end
   end

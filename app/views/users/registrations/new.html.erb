@@ -1,105 +1,113 @@
 <div class="container signup-wrapper">
   <div class="row">
-    <div class="page_title">
-      <h2>新規ユーザー登録</h2>
+    <div class="col-xs-12">
+      <div class="page_title">
+        <h2>新規ユーザー登録</h2>
+      </div>
     </div>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
-      <table class="table">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :name, "ニックネーム" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :email, "メールアドレス" %><br />
-                <%= f.email_field :email, autocomplete: "email" %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <p><strong>性別</strong></p>
-                <%= f.label :gender, "男性" %>
-                <%= f.radio_button :gender, :男性 %>
-                <%= f.label :gender, "女性" %>
-                <%= f.radio_button :gender, :女性 %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :age, "年齢" %><br />
-                <%= f.number_field :age, min:0, max:100, autocomplete: "age" %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :prefectures, "活動地域" %><br>
-                <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
-                  <%= area.label {area.check_box + area.text} %>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :parts, "担当パート" %><br>
-                <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
-                  <%= part.label {part.check_box + part.text} %>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :genres, "好きなジャンル" %><br>
-                <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
-                  <%= genre.label {genre.check_box + genre.text} %>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :password, "パスワード" %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> 文字以上)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "new-password" %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="field">
-                <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="actions">
-        <%= f.submit "新規登録", class: "btn btn-primary" %>
+      <div class="col-xs-12">
+        <table class="table">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :name, "ニックネーム" %><br />
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :email, "メールアドレス" %><br />
+                  <%= f.email_field :email, autocomplete: "email" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <p><strong>性別</strong></p>
+                  <%= f.label :gender, "男性" %>
+                  <%= f.radio_button :gender, :男性 %>
+                  <%= f.label :gender, "女性" %>
+                  <%= f.radio_button :gender, :女性 %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :age, "年齢" %><br />
+                  <%= f.number_field :age, min:0, max:100, autocomplete: "age" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :prefectures, "活動地域" %><br>
+                  <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
+                    <%= area.label {area.check_box + area.text} %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :parts, "担当パート" %><br>
+                  <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
+                    <%= part.label {part.check_box + part.text} %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :genres, "好きなジャンル" %><br>
+                  <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
+                    <%= genre.label {genre.check_box + genre.text} %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :password, "パスワード" %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> 文字以上)</em>
+                  <% end %><br />
+                  <%= f.password_field :password, autocomplete: "new-password" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="actions col-xs-6 col-xs-offset-3">
+        <%= f.submit "新規登録", class: "btn btn-primary bs_btn_wide", style: "margin-bottom: 30px;" %>
       </div>
     <% end %>
-    <h4>既に登録済みの方</h4>
-    <p><%= link_to "こちら", new_session_path(resource_name),class: "top__link" %>からログインしてください。</p>
+    <div class="col-xs-12" style="text-align: center;">
+      <h4>既に登録済みの方</h4>
+      <p>
+        <%= link_to "こちら", new_session_path(resource_name),class: "top__link", style: "border-bottom:1px solid;" %>からログインしてください。
+      </p>
+    </div>
   </div>
 </div>
