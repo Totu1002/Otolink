@@ -8,23 +8,23 @@
       <%= form_with url: recruit_search_path, method: :get, local: true do |f| %>
         <div class="col-xs-12">
           <dl id="acMenu">
-            <dt>記事の種類</dt>
+            <dt>▼記事の種類</dt>
             <dd><%= f.select :article_type, ["メンバー募集", "バンド募集"] %></dd>
-            <dt>活動の方向性</dt>
+            <dt>▼活動の方向性</dt>
             <dd><%= f.select :stance, ["プロ志向", "アマチュア志向"] %></dd>
-            <dt>活動地域</dt>
+            <dt>▼活動地域</dt>
             <dd>
               <%= f.collection_check_boxes(:prefecture_ids, Prefecture.all, :id, :name, include_hidden: false) do |area| %>
                 <%= area.label {area.check_box + area.text} %>
               <% end %>
             </dd>
-            <dt>パート</dt>
+            <dt>▼パート</dt>
             <dd>
               <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name, include_hidden: false) do |part| %>
                 <%= part.label {part.check_box + part.text} %>
               <% end %>
             </dd>
-            <dt>ジャンル</dt>
+            <dt>▼ジャンル</dt>
             <dd>
               <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name, include_hidden: false) do |genre| %>
                 <%= genre.label {genre.check_box + genre.text} %>
